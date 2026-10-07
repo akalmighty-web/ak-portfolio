@@ -4,6 +4,7 @@ import Lenis from 'lenis'
 import { categoryLabel } from '../data/projects'
 import { closeProject, projectBySlug } from '../engine/projects'
 import { useStore } from '../engine/store'
+import { mediaAlt } from '../seo'
 import { trapFocus } from '../engine/focusTrap'
 
 /**
@@ -114,7 +115,7 @@ function Panel({ root, project }) {
 
             <div className="pv-media">
               {project.media.map((m, i) => (
-                <Media key={i} item={m} title={project.title} index={i} />
+                <Media key={i} item={m} project={project} index={i} />
               ))}
             </div>
 
@@ -159,7 +160,9 @@ function Description({ text }) {
   )
 }
 
-function Media({ item, title, index }) {
+function Media({ item, project, index }) {
+  const title = project.title
+  const alt = mediaAlt(project, index, project.media.length)
   const ratio = { aspectRatio: `${item.width} / ${item.height}` }
   if (item.type === 'image')
     return (
@@ -173,14 +176,14 @@ function Media({ item, title, index }) {
         height={item.height}
         loading={index < 2 ? 'eager' : 'lazy'}
         decoding="async"
-        alt={`${title}, image ${index + 1}`}
+        alt={alt}
       />
     )
   if (item.type === 'video')
     return item.loop ? (
-      <video className="pv-item" style={ratio} src={item.src} poster={item.poster} muted loop playsInline preload="metadata" data-loop aria-label={`${title}, animation ${index + 1}`} />
+      <video className="pv-item" style={ratio} src={item.src} poster={item.poster} muted loop playsInline preload="metadata" data-loop aria-label={alt} />
     ) : (
-      <video className="pv-item" style={ratio} src={item.src} controls playsInline preload="metadata" />
+      <video className="pv-item" style={ratio} src={item.src} controls playsInline preload="metadata" aria-label={alt} />
     )
   if (item.type === 'youtube')
     return (

@@ -12,7 +12,7 @@ let state = {
   project: 0, // Projects: index of the centre cartridge within that category
   projectDir: 0, // last switch: -1 / +1 (arrows or swipes), 0 (category)
   blocked: false, // the "rotate your phone" overlay is up: the page underneath waits
-  openSlug: null, // slug of the project open in the project view (mirrors #/projects/<slug>)
+  openSlug: null, // slug of the project open in the project view (mirrors /projects/<slug>)
 }
 const subs = new Set()
 

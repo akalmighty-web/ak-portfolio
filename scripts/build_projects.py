@@ -86,6 +86,21 @@ def trim_padding(img):
     return img.crop((xs.min(), ys.min(), xs.max() + 1, ys.max() + 1))
 
 
+def save_share_image(img, src, dest_dir):
+    """og.jpg: the thumbnail on a 1200x630 card, for link previews (JPEG works everywhere)."""
+    path = dest_dir / "og.jpg"
+    if not fresh(path, src):
+        W, H = 1200, 630
+        card = Image.new("RGB", (W, H), (253, 253, 253))
+        art = img.convert("RGBA")
+        s = max(W / art.width, H / art.height)  # cover the card
+        art = art.resize((round(art.width * s), round(art.height * s)), Image.LANCZOS)
+        art = art.crop(((art.width - W) // 2, (art.height - H) // 2, (art.width - W) // 2 + W, (art.height - H) // 2 + H))
+        card.paste(art, (0, 0), art)
+        card.save(path, "JPEG", quality=85, optimize=True, progressive=True)
+    return path
+
+
 def is_animated(path):
     try:
         return getattr(Image.open(path), "n_frames", 1) > 1
@@ -138,7 +153,9 @@ def build_project(folder, category):
     dest.mkdir(parents=True, exist_ok=True)
 
     # cartridge thumbnail
-    thumb = save_webp_set(trim_padding(Image.open(thumb_src)), thumb_src, dest, "thumbnail", THUMB_WIDTHS)
+    thumb_img = trim_padding(Image.open(thumb_src))
+    thumb = save_webp_set(thumb_img, thumb_src, dest, "thumbnail", THUMB_WIDTHS)
+    og = save_share_image(thumb_img, thumb_src, dest)
 
     # content order: config order first, then anything else (natural sort); covers only when listed
     skip = {s.lower() for s in cfg.get("skip", [])} | {thumb_src.name.lower()}
@@ -188,6 +205,7 @@ def build_project(folder, category):
         "behance": cfg.get("behance"),
         "description": cfg.get("description"),
         "thumbnail": {"src": url(thumb[-1][2]), "srcset": ", ".join(f"{url(p)} {w}w" for w, _, p in thumb)},
+        "og": url(og),
         "media": media,
     }
 

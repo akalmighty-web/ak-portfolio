@@ -106,6 +106,19 @@ previous one and choose **Promote to Production** to go back instantly.
 
 ---
 
+## Address and search engines
+
+- The site's address is `SITE_URL` in `src/config.js`. If the domain ever
+  changes, change it there only: link previews, canonical links, the sitemap and
+  the structured data all follow.
+- Every project gets its own page at `/projects/<name>` automatically, with its
+  own title, description and preview image, and is added to `sitemap.xml` at
+  the next build. Titles, descriptions and alt texts are written in `src/seo.js`.
+- Google Search Console verification tag: paste it in `index.html` where the
+  comment says so (near the top of `<head>`), then publish.
+
+---
+
 ## Good to know
 
 - **Never upload originals:** `.gitignore` already keeps `Animations/`, `Projects/`,

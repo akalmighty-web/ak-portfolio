@@ -80,7 +80,7 @@ export default function Preloader() {
 
   if (gone) return null
   return (
-    <div ref={root} className="preloader" aria-label="Loading">
+    <div ref={root} className="preloader" role="status" aria-label="Loading">
       <video ref={video} src="/media/logo-loop.mp4" muted playsInline preload="auto" />
     </div>
   )

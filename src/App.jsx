@@ -12,9 +12,10 @@ import Cartridges from './components/Cartridges'
 import ProjectView from './components/ProjectView'
 import AchievementToast from './components/AchievementToast'
 import SpeechBubble from './components/SpeechBubble'
-import { bindProjectRoute } from './engine/projects'
+import { bindRoutes } from './engine/projects'
 import Header from './components/Header'
 import RotateOverlay from './components/RotateOverlay'
+import SeoText from './components/SeoText'
 import Nav from './components/Nav'
 import ScrollHint from './components/ScrollHint'
 import AboutBand from './components/AboutBand'
@@ -35,7 +36,7 @@ export default function App() {
   useEffect(() => bindParallax(), [])
   useEffect(() => bindUiSounds(), [])
   useEffect(() => bindEggs(), [])
-  useEffect(() => bindProjectRoute(), [])
+  useEffect(() => bindRoutes(), [])
 
   // a direct link to a project: once the intro is done, bring the Projects page
   // up behind the project view so closing it lands there
@@ -78,6 +79,7 @@ export default function App() {
           </div>
         </div>
       </main>
+      <SeoText />
       <ProjectView />
       <AchievementToast />
       <SpeechBubble />

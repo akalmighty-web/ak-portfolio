@@ -1,15 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import seo from './scripts/prerender.js'
 
-// The site's public address, for the link-preview tags in index.html (social
-// sites need absolute URLs). On Vercel it is filled in automatically from the
-// production domain; set SITE_URL to override (e.g. SITE_URL=https://example.com).
-const site = (
-  process.env.SITE_URL ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : '')
-).replace(/\/$/, '')
-
+// seo(): page titles, link previews, structured data, a static HTML page per
+// route, sitemap.xml and robots.txt, all for SITE_URL in src/config.js.
 export default defineConfig({
-  plugins: [react(), { name: 'site-url', transformIndexHtml: (html) => html.replaceAll('%SITE_URL%', site) }],
+  plugins: [react(), seo()],
   server: { port: 5173 },
 })

@@ -118,8 +118,9 @@ export default function Home() {
 
   return (
     <section ref={root} className="page page-home" aria-hidden={!shown}>
-      <h1 className="home-title" aria-label="Ananth">
-        <span className="title-en" dangerouslySetInnerHTML={{ __html: withHitArea(wrapHalo(title)) }} />
+      <h1 className="home-title">
+        <span className="sr-only">Ananth Krishnan</span>
+        <span className="title-en" aria-hidden="true" dangerouslySetInnerHTML={{ __html: withHitArea(wrapHalo(title)) }} />
         <span className="title-ml" aria-hidden="true" dangerouslySetInnerHTML={{ __html: withHitArea(titleMl) }} />
       </h1>
 

@@ -12,6 +12,7 @@
         "src": "/projects/material-study-vol-1/thumbnail-1200.webp",
         "srcset": "/projects/material-study-vol-1/thumbnail-640.webp 640w, /projects/material-study-vol-1/thumbnail-1200.webp 1200w"
       },
+      "og": "/projects/material-study-vol-1/og.jpg",
       "media": [
         {
           "type": "image",
@@ -125,6 +126,7 @@
         "src": "/projects/pubgx-fifa-promotional-video-character-concept/thumbnail-1200.webp",
         "srcset": "/projects/pubgx-fifa-promotional-video-character-concept/thumbnail-640.webp 640w, /projects/pubgx-fifa-promotional-video-character-concept/thumbnail-1200.webp 1200w"
       },
+      "og": "/projects/pubgx-fifa-promotional-video-character-concept/og.jpg",
       "media": [
         {
           "type": "image",
@@ -223,6 +225,7 @@
         "src": "/projects/blind-an-animation-concept/thumbnail-1200.webp",
         "srcset": "/projects/blind-an-animation-concept/thumbnail-640.webp 640w, /projects/blind-an-animation-concept/thumbnail-1200.webp 1200w"
       },
+      "og": "/projects/blind-an-animation-concept/og.jpg",
       "media": [
         {
           "type": "image",
@@ -294,6 +297,7 @@
         "src": "/projects/believe-thesis-film/thumbnail-1200.webp",
         "srcset": "/projects/believe-thesis-film/thumbnail-640.webp 640w, /projects/believe-thesis-film/thumbnail-1200.webp 1200w"
       },
+      "og": "/projects/believe-thesis-film/og.jpg",
       "media": [
         {
           "type": "image",
@@ -397,6 +401,7 @@
         "src": "/projects/arcado-battle-game-art-portfolio/thumbnail-1200.webp",
         "srcset": "/projects/arcado-battle-game-art-portfolio/thumbnail-640.webp 640w, /projects/arcado-battle-game-art-portfolio/thumbnail-1200.webp 1200w"
       },
+      "og": "/projects/arcado-battle-game-art-portfolio/og.jpg",
       "media": [
         {
           "type": "video",
@@ -559,6 +564,7 @@
         "src": "/projects/arcado-battle-new-character-concept/thumbnail-1200.webp",
         "srcset": "/projects/arcado-battle-new-character-concept/thumbnail-640.webp 640w, /projects/arcado-battle-new-character-concept/thumbnail-1200.webp 1200w"
       },
+      "og": "/projects/arcado-battle-new-character-concept/og.jpg",
       "media": [
         {
           "type": "image",
@@ -609,6 +615,7 @@
         "src": "/projects/emote-collections/thumbnail-1200.webp",
         "srcset": "/projects/emote-collections/thumbnail-640.webp 640w, /projects/emote-collections/thumbnail-1200.webp 1200w"
       },
+      "og": "/projects/emote-collections/og.jpg",
       "media": [
         {
           "type": "image",
@@ -725,6 +732,7 @@
         "src": "/projects/the-planet-ai-short/thumbnail-1200.webp",
         "srcset": "/projects/the-planet-ai-short/thumbnail-640.webp 640w, /projects/the-planet-ai-short/thumbnail-1200.webp 1200w"
       },
+      "og": "/projects/the-planet-ai-short/og.jpg",
       "media": [
         {
           "type": "image",
@@ -809,6 +817,7 @@
         "src": "/projects/the-christmas-run-ai-short/thumbnail-1200.webp",
         "srcset": "/projects/the-christmas-run-ai-short/thumbnail-640.webp 640w, /projects/the-christmas-run-ai-short/thumbnail-1200.webp 1200w"
       },
+      "og": "/projects/the-christmas-run-ai-short/og.jpg",
       "media": [
         {
           "type": "image",
@@ -893,6 +902,7 @@
         "src": "/projects/the-golden-shackle/thumbnail-1200.webp",
         "srcset": "/projects/the-golden-shackle/thumbnail-640.webp 640w, /projects/the-golden-shackle/thumbnail-1200.webp 1200w"
       },
+      "og": "/projects/the-golden-shackle/og.jpg",
       "media": [
         {
           "type": "image",

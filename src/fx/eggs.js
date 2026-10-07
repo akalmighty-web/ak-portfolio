@@ -122,8 +122,11 @@ export function bindEggs() {
   offs.push(() => document.removeEventListener('click', onHalo, true))
 
   // ---- hidden tab ----
-  const title = document.title
-  const onVisibility = () => (document.title = document.hidden ? '👀 Player 2, come back!' : title)
+  let title = document.title
+  const onVisibility = () => {
+    if (document.hidden) (title = document.title), (document.title = '👀 Player 2, come back!')
+    else document.title = title
+  }
   document.addEventListener('visibilitychange', onVisibility)
   offs.push(() => document.removeEventListener('visibilitychange', onVisibility))
 

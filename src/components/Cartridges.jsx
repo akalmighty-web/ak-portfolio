@@ -5,6 +5,7 @@ import { PAGES } from '../config'
 import { CATEGORIES } from '../data/projects'
 import { cartridgesIn, openProject, stepProject } from '../engine/projects'
 import { useStore } from '../engine/store'
+import { thumbnailAlt } from '../seo'
 import { finePointer, reducedMotion } from '../fx/env'
 import { sfx } from '../fx/sound'
 import { showBubble } from '../fx/bubble'
@@ -296,7 +297,7 @@ function CartridgeSet({ category, active, shown }) {
             >
               <span className="cartridge-tilt">
                 <span className="cartridge-screen">
-                  <img src={loadImages ? p.thumbnail.src : undefined} srcSet={loadImages ? p.thumbnail.srcset : undefined} sizes="(min-width: 900px) 480px, 60vw" alt="" draggable="false" />
+                  <img src={loadImages ? p.thumbnail.src : undefined} srcSet={loadImages ? p.thumbnail.srcset : undefined} sizes="(min-width: 900px) 480px, 60vw" alt={thumbnailAlt(p)} draggable="false" />
                 </span>
                 <img className="cartridge-body" src={cartridgeUrl} alt="" draggable="false" />
               </span>

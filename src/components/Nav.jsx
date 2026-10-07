@@ -4,6 +4,8 @@ import { Flip } from 'gsap/Flip'
 import { NAV_MOVE, PAGES } from '../config'
 import { goTo, onFrame } from '../engine/experience'
 import { useStore } from '../engine/store'
+import { plainClick } from '../engine/projects'
+import { pathForPage } from '../seo'
 import { Underline } from './Icons'
 
 gsap.registerPlugin(Flip)
@@ -81,10 +83,10 @@ export default function Nav() {
       {PAGES.map((p, i) => (
         <a
           key={p.id}
-          href={`#${p.id}`}
+          href={pathForPage(i)}
           className={`nav-item nav-item--${p.id}`}
           aria-current={i === page ? 'page' : undefined}
-          onClick={(e) => (e.preventDefault(), goTo(i))}
+          onClick={(e) => plainClick(e) && (e.preventDefault(), goTo(i))}
         >
           <span className="nav-mask">
             <span className="nav-label">{p.label}</span>

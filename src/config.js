@@ -1,5 +1,9 @@
 // Site-wide settings. Edit links, timings and page freeze frames here.
 
+// The live address. Used for the canonical links, link previews, sitemap and
+// structured data (src/seo.js). Change it here if the domain ever changes.
+export const SITE_URL = 'https://ak24-portfolio.vercel.app'
+
 export const EMAIL = '25akalmighty@gmail.com'
 export const CV_URL = '/cv/Ananthkrishnan-CV-2026.pdf'
 
