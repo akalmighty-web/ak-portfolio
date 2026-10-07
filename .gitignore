@@ -11,19 +11,21 @@ dist/
 !.env.example
 
 # large source material. The site uses the optimised copies in public/ and
-# src/assets/ (made by process_frames.py and the scripts in scripts/)
-Animations/
-Projects/
-assets/
-Fonts/
-CV/
+# src/assets/ (made by process_frames.py and the scripts in scripts/).
+# The leading / matters: only these top-level folders (git on Windows ignores
+# case, so "Projects/" alone would also hide public/projects/).
+/Animations/
+/Projects/
+/assets/
+/Fonts/
+/CV/
 *.mp4.part
 
 # design references, screenshots and working notes
-Website Reference/
-screenshots/
-Links/
-PROJECT_BRIEF.md
+/Website Reference/
+/screenshots/
+/Links/
+/PROJECT_BRIEF.md
 
 # local tool settings
 .claude/
