@@ -1,0 +1,18 @@
+/* Shared look for terms.html and privacy.html (plain pages, outside the app). */
+@font-face { font-family: 'Trash Hand'; src: url('/fonts/trashhand.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Satoshi'; src: url('/fonts/satoshi-regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Satoshi'; src: url('/fonts/satoshi-bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+:root { --red: #ff0346; --ink: #111; --paper: #fdfdfd; }
+* { box-sizing: border-box; }
+html { background: var(--paper); color: var(--ink); }
+body { margin: 0; font: 400 17px/1.65 'Satoshi', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+main { max-width: 680px; margin: 0 auto; padding: max(28px, env(safe-area-inset-top)) 20px max(64px, env(safe-area-inset-bottom)); }
+.back { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--ink); font-weight: 700; text-decoration: none; }
+.back:hover { color: #d6003b; }
+h1 { margin: 28px 0 4px; font: 400 clamp(48px, 9vw, 76px)/1 'Trash Hand', cursive; text-transform: uppercase; color: var(--red); }
+h2 { margin: 34px 0 6px; font: 400 30px/1.1 'Trash Hand', cursive; text-transform: uppercase; }
+.updated { margin: 0 0 28px; color: #555; font-size: 15px; }
+a { color: #d6003b; }
+a:focus-visible { outline: 2px solid var(--red); outline-offset: 4px; border-radius: 4px; }
+ul { padding-left: 1.2em; }
+footer { margin-top: 48px; color: #555; font-size: 15px; }

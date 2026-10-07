@@ -1,0 +1,146 @@
+.page {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* hidden until the page timeline brings them in */
+.home-title,
+.home-anim {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.home-title {
+  position: absolute;
+  left: calc(284 * var(--px));
+  top: calc(6 * var(--px));
+  width: calc(832 * var(--px));
+  margin: 0;
+}
+.home-title svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* ---------- role tag (left) ---------- */
+.home-tag {
+  position: absolute;
+  left: calc(116 * var(--px));
+  top: calc(410 * var(--px));
+  margin: 0;
+  font-family: var(--hand);
+  text-transform: uppercase;
+  line-height: 1;
+}
+.tag-line1 {
+  display: block;
+  font-size: calc(37 * var(--px));
+}
+.tag-line2 {
+  display: block;
+  margin: calc(4 * var(--px)) 0 0 calc(11 * var(--px));
+  font-size: calc(60 * var(--px));
+}
+.tag-underline {
+  width: calc(292 * var(--px));
+  height: calc(15 * var(--px));
+  margin: calc(6 * var(--px)) 0 0 calc(4 * var(--px));
+}
+
+/* ---------- doodle note (right) ---------- */
+.home-note {
+  position: absolute;
+  left: calc(1084 * var(--px));
+  top: calc(424 * var(--px));
+  transform: rotate(-15deg);
+  transform-origin: left top;
+}
+.home-note p {
+  margin: 0;
+  font-family: var(--hand);
+  font-size: calc(28 * var(--px));
+  line-height: 0.96;
+  text-transform: uppercase;
+}
+.home-note p > span {
+  display: block;
+}
+.home-note p > span:nth-child(2) { padding-left: calc(30 * var(--px)); }
+.home-note p > span:nth-child(3) { padding-left: calc(8 * var(--px)); }
+.home-note p > span:nth-child(4) { padding-left: calc(36 * var(--px)); }
+.note-smile {
+  display: inline-block;
+  margin-left: calc(6 * var(--px));
+  transform: rotate(90deg) translateX(calc(-4 * var(--px)));
+}
+.note-swoosh {
+  width: calc(108 * var(--px));
+  margin: calc(12 * var(--px)) 0 0 calc(18 * var(--px));
+  transform: rotate(15deg);
+  color: var(--ink);
+}
+
+/* ---------- stats: 3+ under the tag (left), 6+ and 2+ under the note (right) ----------
+   Kept clear of the character on every window shape: on ultra-wide and 4:3 screens
+   he is drawn larger, reaching x 222–1064 of the design box below y 520.
+   Every stat has the same width, its number and label centred in it. */
+.home-stats {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.stat {
+  position: absolute;
+  top: calc(616 * var(--px));
+  width: calc(150 * var(--px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--hand);
+  text-transform: uppercase;
+  text-align: center;
+}
+/* a soft clearing, so no background pixel sits right behind a stat */
+.stat::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: calc(-56 * var(--px)) calc(-46 * var(--px));
+  background: radial-gradient(closest-side, var(--paper) 30%, rgba(253, 253, 253, 0.85) 50%, rgba(253, 253, 253, 0.4) 72%, transparent);
+}
+.stat:nth-child(1) { left: calc(100 * var(--px)); }
+.stat:nth-child(2) { left: calc(1104 * var(--px)); }
+.stat:nth-child(3) { left: calc(1262 * var(--px)); }
+.stat-num {
+  display: flex;
+  align-items: center;
+  font-size: calc(92 * var(--px));
+  line-height: 0.8;
+  color: var(--red);
+}
+/* every digit gets the same box, so the "+" holds still while counting */
+.stat-value {
+  display: inline-block;
+  width: 0.38em;
+  text-align: center;
+}
+/* the font's own "+" is empty: a pen-stroke plus in the same weight */
+.stat-plus {
+  width: 0.42em;
+  height: 0.42em;
+  margin-left: 0.01em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3.4;
+  stroke-linecap: round;
+  overflow: visible;
+}
+.stat-label {
+  margin-top: calc(12 * var(--px));
+  font-size: calc(25 * var(--px));
+  line-height: 1.12;
+  white-space: pre-line;
+  color: var(--ink);
+}

@@ -1,0 +1,257 @@
+/* All sizes are Figma pixels from the 1440×900 frames, multiplied by --px. */
+
+[data-visible='false'] {
+  visibility: hidden;
+}
+
+/* ---------- header ---------- */
+.header {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 3;
+}
+
+.logo {
+  position: absolute;
+  left: calc(34 * var(--px));
+  top: calc(26 * var(--px));
+  width: calc(46 * var(--px));
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.logo svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.logo:hover {
+  transform: rotate(-6deg) scale(1.06);
+}
+
+.header-right {
+  position: absolute;
+  right: calc(38 * var(--px));
+  top: calc(26 * var(--px));
+  display: flex;
+  align-items: center;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  gap: calc(18 * var(--px));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.socials a {
+  display: block;
+  width: calc(20 * var(--px));
+  height: calc(20 * var(--px));
+  color: var(--ink);
+  transition: color 0.25s, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.socials a:hover {
+  color: var(--red);
+  transform: translateY(-2px) scale(1.1);
+}
+.socials svg {
+  width: 100%;
+  height: 100%;
+}
+
+.header-divider {
+  width: 1.5px;
+  height: calc(47 * var(--px));
+  margin: 0 calc(17 * var(--px)) 0 calc(25 * var(--px));
+  background: var(--ink);
+}
+
+.lets-connect {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: var(--hand);
+  font-size: calc(23 * var(--px));
+  line-height: 0.9;
+  text-transform: uppercase;
+  transform: rotate(-13deg);
+  transform-origin: left center;
+}
+.lets-connect span:first-child {
+  padding-left: calc(2 * var(--px));
+}
+.lets-connect-arrow {
+  width: calc(24 * var(--px));
+  margin: calc(1 * var(--px)) 0 0 calc(30 * var(--px));
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.lets-connect:hover {
+  color: var(--red);
+}
+.lets-connect:hover .lets-connect-arrow {
+  transform: translateX(calc(6 * var(--px)));
+}
+
+/* ---------- nav ---------- */
+/* one row, equal gaps; the Home layout only adds room for the head */
+.nav {
+  --nav-gap: calc(76 * var(--px));
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  gap: var(--nav-gap);
+  pointer-events: none;
+}
+
+.nav-item {
+  position: relative;
+  font-family: var(--hand);
+  font-size: calc(40 * var(--px));
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: color 0.4s;
+  white-space: nowrap;
+}
+.nav-item:hover {
+  color: var(--red);
+}
+.nav-item[aria-current='page'] {
+  color: var(--red);
+}
+
+.nav-mask {
+  display: block;
+  overflow: hidden;
+  padding: 0.08em 0.04em 0.02em;
+}
+.nav-label {
+  display: block;
+}
+
+.nav-underline {
+  position: absolute;
+  left: -4%;
+  width: 108%;
+  bottom: calc(-9 * var(--px));
+  height: calc(10 * var(--px));
+  color: var(--red);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.nav-item[aria-current='page'] .nav-underline {
+  clip-path: inset(0 0 0 0);
+  transition-delay: 0.15s;
+}
+
+/* The two layouts differ only in where the row sits and two spacing values,
+   which Nav.jsx animates between (the row moves as one piece). */
+.nav {
+  padding-left: var(--nav-shift);
+}
+.nav-item--projects {
+  margin-left: var(--nav-head-room);
+}
+
+/* Home: under the title, opened up in the middle around the character's head */
+.nav--home {
+  top: calc(291 * var(--px));
+  --nav-shift: calc(24 * var(--px)); /* the Figma row is centred 12px right of centre */
+  --nav-head-room: calc(296 * var(--px));
+}
+
+/* About onward: fixed at the top centre */
+.nav--top {
+  top: calc(36 * var(--px));
+  --nav-shift: 0px;
+  --nav-head-room: 0px;
+}
+
+/* ---------- scroll hint ---------- */
+.scroll-hint {
+  position: absolute;
+  right: calc(40 * var(--px));
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(6 * var(--px));
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: calc(16 * var(--px));
+  line-height: 1.12;
+  text-align: center;
+  transform: translateY(-40%);
+  opacity: 0;
+  transition: opacity 0.6s, transform 0.6s;
+}
+.scroll-hint[data-visible='true'] {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(-50%);
+}
+.scroll-hint[data-visible='false'] {
+  visibility: visible;
+  transition-duration: 0.25s;
+}
+
+.hint-mobile {
+  display: none;
+}
+/* touch screens: "swipe up" instead of the mouse and "scroll for more" */
+html.is-touch .hint-mobile {
+  display: inline;
+}
+html.is-touch .hint-desktop,
+html.is-touch .scroll-mouse {
+  display: none;
+}
+html.is-touch .scroll-arrow {
+  transform: rotate(180deg); /* points the way to swipe */
+  animation: none;
+}
+
+.scroll-mouse {
+  position: relative;
+  width: calc(20 * var(--px));
+  height: calc(36 * var(--px));
+  border: 2px solid var(--ink);
+  border-radius: calc(10 * var(--px));
+}
+.scroll-dot {
+  position: absolute;
+  left: 50%;
+  top: calc(18 * var(--px));
+  width: calc(6 * var(--px));
+  height: calc(6 * var(--px));
+  margin-left: calc(-3 * var(--px));
+  border-radius: 50%;
+  background: var(--red);
+  animation: scroll-dot 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+@keyframes scroll-dot {
+  0% { transform: translateY(calc(-10 * var(--px))); opacity: 0; }
+  30% { opacity: 1; }
+  70% { transform: translateY(calc(4 * var(--px))); opacity: 1; }
+  100% { transform: translateY(calc(6 * var(--px))); opacity: 0; }
+}
+
+.scroll-arrow {
+  width: calc(22 * var(--px));
+  margin-top: calc(4 * var(--px));
+  animation: scroll-arrow 1.8s ease-in-out infinite;
+}
+@keyframes scroll-arrow {
+  50% { transform: translateY(calc(5 * var(--px))); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-dot,
+  .scroll-arrow {
+    animation: none;
+  }
+}

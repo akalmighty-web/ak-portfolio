@@ -1,0 +1,37 @@
+@font-face {
+  font-family: 'Trash Hand';
+  src: url('../assets/fonts/trashhand.woff2') format('woff2');
+  font-display: block;
+  /* the font's * ~ [ ] glyphs are empty: let those fall back to another font */
+  unicode-range: U+0000-0029, U+002B-005A, U+005C, U+005E-007D, U+007F-10FFFF;
+}
+@font-face {
+  font-family: 'Pixeloid Sans';
+  src: url('../assets/fonts/pixeloid-sans.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pixeloid Sans';
+  src: url('../assets/fonts/pixeloid-sans-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../assets/fonts/satoshi-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../assets/fonts/satoshi-medium.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../assets/fonts/satoshi-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}

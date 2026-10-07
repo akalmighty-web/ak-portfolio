@@ -1,0 +1,148 @@
+:root {
+  --red: #ff0346;
+  --yellow: #ffc300;
+  --ink: #111111;
+  --paper: #fdfdfd; /* matches the white of the animation frames */
+  --hand: 'Trash Hand', 'Comic Sans MS', cursive;
+  --pixel: 'Pixeloid Sans', monospace;
+  --sans: 'Satoshi', system-ui, sans-serif;
+
+  /* 1 design pixel. The Figma frames are 1440×900; the UI scales with the
+     viewport so it stays locked to the cover-fit character frames.
+     (vh for browsers without dvh: Safari before 15.4) */
+  --px: min(calc(100vw / 1440), calc(100vh / 900));
+}
+@supports (height: 100dvh) {
+  :root {
+    --px: min(calc(100vw / 1440), calc(100dvh / 900));
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+svg {
+  display: block;
+}
+
+:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* ---------- stage + layers (back to front) ---------- */
+.stage {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+/* desktop: the stage is the window */
+.stage-scaler {
+  position: absolute;
+  inset: 0;
+}
+
+/* Phones, tablets, small and portrait windows: the desktop layout at desktop
+   size (1920×1080, or the screen's shape where desktop supports it), scaled to
+   fit inside the safe areas. engine/viewport.js sets the size, scale and offset;
+   the pixel background (outside the scaler) fills any space left.
+   No will-change here, so the browser re-rasterises text at the final size (crisp). */
+html.is-scaled {
+  --px: var(--stage-px, 1.2px);
+}
+html.is-scaled .stage {
+  bottom: auto;
+  height: 100vh;
+  height: 100dvh;
+}
+html.is-scaled .stage-scaler {
+  inset: auto;
+  left: 0;
+  top: 0;
+  width: var(--stage-w, 1920px);
+  height: var(--stage-h, 1080px);
+  overflow: hidden;
+  transform-origin: 0 0;
+  transform: translate(var(--stage-x, 0px), var(--stage-y, 0px)) scale(var(--stage-scale, 1));
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+}
+
+.layer-bg {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.layer-bg svg {
+  width: 100%;
+  height: 100%;
+}
+
+.layer-canvas {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.layer-ui {
+  pointer-events: none;
+}
+.layer-ui a,
+.layer-ui button {
+  pointer-events: auto;
+}
+
+/* the 1440×900 design box, centred */
+.ui-box {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(1440 * var(--px));
+  height: calc(900 * var(--px));
+  transform: translate(-50%, -50%);
+}
+
+/* ---------- preloader ---------- */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #000;
+  display: grid;
+  place-items: center;
+}
+.preloader video {
+  /* the video is the centre third of the 8K logo animation, so size it as a
+     third of a cover-fit 16:9 frame to keep the logo at its intended scale */
+  width: calc(max(100vw, 100vh * 16 / 9) / 3);
+  width: calc(max(100vw, 100dvh * 16 / 9) / 3);
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}

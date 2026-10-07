@@ -1,0 +1,37 @@
+# Only the code and the web-ready files the site uses go to GitHub.
+# Everything below stays on this computer.
+
+# dependencies and build output (recreate with `npm install` / `npm run build`)
+node_modules/
+dist/
+
+# secrets / local settings
+.env
+.env.*
+!.env.example
+
+# large source material. The site uses the optimised copies in public/ and
+# src/assets/ (made by process_frames.py and the scripts in scripts/)
+Animations/
+Projects/
+assets/
+Fonts/
+CV/
+*.mp4.part
+
+# design references, screenshots and working notes
+Website Reference/
+screenshots/
+Links/
+PROJECT_BRIEF.md
+
+# local tool settings
+.claude/
+.vercel/
+
+# OS / editor clutter
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+__pycache__/

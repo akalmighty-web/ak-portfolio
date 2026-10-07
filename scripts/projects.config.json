@@ -1,0 +1,188 @@
+{
+  "_readme": [
+    "Optional per-project settings for scripts/build_projects.py. Nothing here is required:",
+    "a project folder with a thumbnail and numbered files works without an entry.",
+    "  categories   category folder name -> tab id (matched case-insensitively by keyword).",
+    "  projectOrder per category, project folder names in display order (others follow, sorted).",
+    "  projects     per project folder: 'order' lists files top to bottom (a {youtube: id} entry adds",
+    "               a video embed there; files not listed are added at the end), 'skip' lists files",
+    "               to leave out, 'behance' links the original project, 'description' is the text",
+    "               shown under the title (a blank line starts a new paragraph, '# ' a heading).",
+    "By default a cover.* file is left out (on Behance a cover is only the grid image).",
+    "Orders, links and descriptions below mirror the Behance project pages as of 2026-10-07",
+    "(every image matched to Behance by its pixels)."
+  ],
+  "categories": {
+    "game": "game-art",
+    "concept": "concept-art",
+    "graphic": "graphics-ai"
+  },
+  "projectOrder": {
+    "game-art": [
+      "Arcado Battle - Game art portfolio",
+      "Arcado Battle - New character Concept",
+      "Emote collections"
+    ],
+    "concept-art": [
+      "Material study- Vol 1",
+      "PUBGX FIFA promotional video character concept",
+      "BLIND - an animation concept",
+      "Believe-Thesis film"
+    ],
+    "graphics-ai": [
+      "THE PLANET [AI SHORT]",
+      "THE CHRISTMAS RUN [AI  SHORT]",
+      "The Golden Shackle"
+    ]
+  },
+  "projects": {
+    "Arcado Battle - Game art portfolio": {
+      "behance": "https://www.behance.net/gallery/242474283/ARCADO-BATTLE-GAME-ART-UIUX-PORTFOLIO",
+      "order": [
+        "1.gif",
+        "2.gif",
+        "3.png",
+        "4.png",
+        "5.png",
+        "pg temp new.gif",
+        "pg temp new 2.gif",
+        "anim page 2.gif",
+        "emotes (from Behance).gif",
+        "9.png",
+        "10.png",
+        "11.png",
+        "12.png",
+        "13.png",
+        "14.png",
+        "15.png",
+        "16.png",
+        "17.png",
+        "thankyou.gif",
+        "copyright strip (from Behance).png"
+      ],
+      "skip": [
+        "1red.gif"
+      ],
+      "description": "This showcase features my 2D art, UI/UX design, and creative direction for Arcado Battle, a fast-paced, casual mobile MOBA by Gapelabs.\n\nThe goal was to create a cohesive visual identity that bridges the gap between mid-core strategy and casual appeal. This project covers the entire art pipeline, from initial character sketches and prop designs to the final UI systems and marketing assets."
+    },
+    "Arcado Battle - New character Concept": {
+      "behance": "https://www.behance.net/gallery/229268281/Arcado-Champs-New-game-character-concepts",
+      "order": [
+        "cover.png",
+        "1.png",
+        "2.png",
+        "3.png",
+        "4.png"
+      ]
+    },
+    "Emote collections": {
+      "behance": "https://www.behance.net/gallery/231036629/Arcado-Champs-emotes-collection",
+      "order": [
+        "Cover.PNG",
+        "1.png",
+        "2.gif",
+        "9.gif",
+        "3.gif",
+        "10.gif",
+        "5.gif",
+        "6.gif",
+        "4.gif",
+        "7.gif",
+        "11.gif",
+        "8.gif",
+        "end.png"
+      ]
+    },
+    "Material study- Vol 1": {
+      "behance": "https://www.behance.net/gallery/254157891/Material-Studies-Vol-1"
+    },
+    "PUBGX FIFA promotional video character concept": {
+      "behance": "https://www.behance.net/gallery/251039835/BGMI-x-FIFA-World-Cup-Campaign-Animation-concept-art",
+      "order": [
+        "1.png",
+        "2.png",
+        "3.png",
+        "4.png",
+        "5.png",
+        "6.png",
+        "7.png",
+        "8.png",
+        "9.png",
+        "10.png",
+        {
+          "youtube": "AZBzQnUu6qw"
+        },
+        "11.png"
+      ],
+      "description": "# BGMI x FIFA World Cup Campaign | Character Design & Promotional Illustration\n\nThis project was created for a promotional animation campaign inspired by the FIFA World Cup, developed by Picsodian Studios in collaboration with BGMI (Battlegrounds Mobile India) and Krafton.\n\nMy role involved designing and illustrating the main football-inspired characters featured in the campaign, including character turnarounds, expression sheets, supporting characters, props. The objective was to create a vibrant cast of young football enthusiasts while maintaining a stylized visual language that would work effectively in both animation and promotional materials.\n\nThe project required developing characters with distinct personalities, recognizable silhouettes, and animation-friendly designs. Alongside the original football characters, the campaign also incorporated BGMI-inspired characters adapted to match the overall visual style."
+    },
+    "BLIND - an animation concept": {
+      "behance": "https://www.behance.net/gallery/230883735/BLIND-An-animation-movie-concept"
+    },
+    "Believe-Thesis film": {
+      "behance": "https://www.behance.net/gallery/200586351/Believe-A-short-animation-(thesis-project)",
+      "order": [
+        "1.png",
+        "2.gif",
+        {
+          "youtube": "jjK6dqDDz28"
+        },
+        "3.png",
+        "4.gif",
+        "5.png",
+        "6.png",
+        "Narration style.gif",
+        "8.png",
+        "9.gif",
+        "10.png",
+        "last page.gif"
+      ]
+    },
+    "THE PLANET [AI SHORT]": {
+      "behance": "https://www.behance.net/gallery/237410827/The-Planet-An-AI-Short-Animation",
+      "order": [
+        "Slide 16_9 - 1.png",
+        {
+          "youtube": "5CAc3bEJTTU"
+        },
+        "Slide 16_9 - 2.png",
+        "Slide 16_9 - 3.png",
+        "Slide 16_9 - 4.png",
+        "Slide 16_9 - 5.png",
+        "Slide 16_9 - 6.png",
+        "Slide 16_9 - 7.png",
+        "Slide 16_9 - 8.png",
+        "Slide 16_9 - 9.png"
+      ],
+      "skip": [
+        "poster 1.png"
+      ],
+      "description": "The Planet is a sci-fi mystery short film created entirely with AI tools — Google Veo and Google Flow. This experimental short dives into the haunting beauty of a world left behind, blending themes of environmental decay, cosmic mystery, and human introspection.\n\nThrough painterly visuals and cinematic storytelling, The Planet explores what remains when civilizations fade — and what it means to witness the echoes of our own world from afar.\nGenre: Sci-Fi | Mystery | Environmental\nCreated using: Google Veo (AI video) & Google Flow (AI composition)\nScore: AI-generated ambient orchestral soundtrack\nDirected by: Ananthkrishnan"
+    },
+    "THE CHRISTMAS RUN [AI  SHORT]": {
+      "behance": "https://www.behance.net/gallery/241087771/THE-CHRISTMAS-RUN-ft-NIKE-fanmade-AI-Ad",
+      "order": [
+        "cover.png",
+        {
+          "youtube": "mKdGGwfmfKQ"
+        },
+        "Slide 16_9 - 13.png",
+        "Slide 16_9 - 15.png",
+        "Slide 16_9 - 16.png",
+        "Slide 16_9 - 17.png",
+        "Slide 16_9 - 18.png",
+        "Slide 16_9 - 19.png",
+        "Slide 16_9 - 14.png",
+        "Slide 16_9 - 20.png"
+      ],
+      "skip": [
+        "thmb.png"
+      ],
+      "description": "When the reindeer go on strike and the clock is ticking, Santa Claus has to find a new way to fly. This is a fan-made concept exploring what a holiday campaign would look like if Santa was the ultimate Nike athlete.🎅❄️🎄\n\n🎬 Video Details:\nConcept & Edit: AK\nGenre: Spec Commercial / Cinematic AI Video\nResolution: 4K\n\n🛠️ Tools Used:\nVideo Generation: Veo\nImage Generation: Gemini pro\nMusic: Custom AI Mix\nEditing: Adobe Premiere Pro\n\n📝 Note: This is a non-commercial fan project created for educational and artistic purposes. This video is not affiliated with or endorsed by Nike."
+    },
+    "The Golden Shackle": {
+      "behance": "https://www.behance.net/gallery/165518235/The-Golden-Shackle-a-comic-against-dowry",
+      "description": "This is a full hand drawn digital comic that in the topic of dowry and marriage.\nThe story have their own symbolic meaning through colors and character\nand each frames and each objects are related to the topic and how the situation of the girl through these stages."
+    }
+  }
+}

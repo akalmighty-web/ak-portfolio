@@ -1,0 +1,225 @@
+/* Behance-style project view */
+
+.pv {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+}
+
+/* the page behind blurs */
+.pv-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(253, 253, 253, 0.32);
+  -webkit-backdrop-filter: blur(16px) saturate(1.05);
+  backdrop-filter: blur(16px) saturate(1.05);
+  cursor: zoom-out;
+}
+
+.pv-panel {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  top: clamp(12px, 3vh, 32px);
+  width: min(calc(100% - 48px), 1480px);
+  translate: -50% 0;
+  overflow: hidden;
+  border-radius: 28px 28px 0 0;
+  background: #fff;
+  box-shadow: 0 -10px 60px rgba(0, 0, 0, 0.18);
+}
+
+.pv-scroller {
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* header: back button left, name with category below */
+.pv-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px clamp(16px, 3vw, 40px);
+  background: rgba(255, 255, 255, 0.86);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.pv-back,
+.pv-footer-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: var(--red);
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+}
+.pv-back {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  box-shadow: 0 6px 16px rgba(255, 3, 70, 0.25);
+}
+.pv-back svg {
+  width: 24px;
+  height: 24px;
+}
+.pv-back:hover,
+.pv-footer-back:hover {
+  transform: translateX(-3px);
+  box-shadow: 0 10px 22px rgba(255, 3, 70, 0.32);
+}
+
+.pv-titles {
+  min-width: 0;
+  flex: 1;
+}
+.pv-title {
+  margin: 0;
+  font-family: var(--hand);
+  font-weight: 400;
+  font-size: clamp(22px, 2.2vw, 34px);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.pv-category {
+  margin: 6px 0 0;
+  font-family: var(--pixel);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+.pv-behance {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  font-weight: 500;
+  font-size: 15px;
+  transition: border-color 0.25s, color 0.25s;
+}
+.pv-behance svg {
+  width: 16px;
+  height: 16px;
+}
+.pv-behance:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+/* the project itself: one column, no gaps, sized like Behance's project
+   view (the window minus ~290px of margin, at most 1400px wide) */
+.pv-media {
+  max-width: min(1400px, calc(100vw - 290px));
+  margin: 0 auto;
+}
+
+/* the project's description (from Behance), above the work */
+.pv-intro {
+  max-width: min(760px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 40px 0 44px;
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.65;
+  color: #2b2b2b;
+}
+.pv-intro h3 {
+  margin: 0 0 14px;
+  font-family: var(--hand);
+  font-weight: 400;
+  font-size: clamp(24px, 2vw, 30px);
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.pv-intro p {
+  margin: 0 0 14px;
+}
+.pv-intro p:last-child {
+  margin-bottom: 0;
+}
+.pv-item {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #f2f2f2;
+}
+.pv-embed {
+  position: relative;
+  background: #000;
+}
+.pv-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.pv-footer {
+  display: flex;
+  justify-content: center;
+  padding: 56px 16px 72px;
+}
+.pv-footer-back {
+  gap: 12px;
+  padding: 16px 30px;
+  border-radius: 999px;
+  font-family: var(--pixel);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.pv-footer-back svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 640px) {
+  .pv-panel {
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+  }
+  .pv-back {
+    width: 44px;
+    height: 44px;
+  }
+  .pv-behance {
+    padding: 10px;
+    font-size: 0;
+    gap: 0;
+  }
+  .pv-behance svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* narrow screens (a phone held upright): the work uses the full width */
+@media (max-width: 900px) {
+  .pv-media {
+    max-width: calc(100vw - 16px);
+  }
+  .pv-intro {
+    padding: 24px 0 26px;
+    font-size: 15.5px;
+    line-height: 1.6;
+  }
+}

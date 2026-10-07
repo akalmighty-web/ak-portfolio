@@ -1,0 +1,984 @@
+{
+  "projects": [
+    {
+      "slug": "material-study-vol-1",
+      "title": "Material study- Vol 1",
+      "category": "concept-art",
+      "number": null,
+      "folder": "Material study- Vol 1",
+      "behance": "https://www.behance.net/gallery/254157891/Material-Studies-Vol-1",
+      "description": null,
+      "thumbnail": {
+        "src": "/projects/material-study-vol-1/thumbnail-1200.webp",
+        "srcset": "/projects/material-study-vol-1/thumbnail-640.webp 640w, /projects/material-study-vol-1/thumbnail-1200.webp 1200w"
+      },
+      "media": [
+        {
+          "type": "image",
+          "src": "/projects/material-study-vol-1/01-1-2400.webp",
+          "srcset": "/projects/material-study-vol-1/01-1-960.webp 960w, /projects/material-study-vol-1/01-1-1600.webp 1600w, /projects/material-study-vol-1/01-1-2400.webp 2400w",
+          "width": 2400,
+          "height": 1582
+        },
+        {
+          "type": "image",
+          "src": "/projects/material-study-vol-1/02-2-2400.webp",
+          "srcset": "/projects/material-study-vol-1/02-2-960.webp 960w, /projects/material-study-vol-1/02-2-1600.webp 1600w, /projects/material-study-vol-1/02-2-2400.webp 2400w",
+          "width": 2400,
+          "height": 534
+        },
+        {
+          "type": "image",
+          "src": "/projects/material-study-vol-1/03-3-2400.webp",
+          "srcset": "/projects/material-study-vol-1/03-3-960.webp 960w, /projects/material-study-vol-1/03-3-1600.webp 1600w, /projects/material-study-vol-1/03-3-2400.webp 2400w",
+          "width": 2400,
+          "height": 1582
+        },
+        {
+          "type": "image",
+          "src": "/projects/material-study-vol-1/04-4-2400.webp",
+          "srcset": "/projects/material-study-vol-1/04-4-960.webp 960w, /projects/material-study-vol-1/04-4-1600.webp 1600w, /projects/material-study-vol-1/04-4-2400.webp 2400w",
+          "width": 2400,
+          "height": 1582
+        },
+        {
+          "type": "image",
+          "src": "/projects/material-study-vol-1/05-5-2400.webp",
+          "srcset": "/projects/material-study-vol-1/05-5-960.webp 960w, /projects/material-study-vol-1/05-5-1600.webp 1600w, /projects/material-study-vol-1/05-5-2400.webp 2400w",
+          "width": 2400,
+          "height": 1582
+        },
+        {
+          "type": "image",
+          "src": "/projects/material-study-vol-1/06-6-2400.webp",
+          "srcset": "/projects/material-study-vol-1/06-6-960.webp 960w, /projects/material-study-vol-1/06-6-1600.webp 1600w, /projects/material-study-vol-1/06-6-2400.webp 2400w",
+          "width": 2400,
+          "height": 1582
+        },
+        {
+          "type": "image",
+          "src": "/projects/material-study-vol-1/07-7-2400.webp",
+          "srcset": "/projects/material-study-vol-1/07-7-960.webp 960w, /projects/material-study-vol-1/07-7-1600.webp 1600w, /projects/material-study-vol-1/07-7-2400.webp 2400w",
+          "width": 2400,
+          "height": 1582
+        },
+        {
+          "type": "image",
+          "src": "/projects/material-study-vol-1/08-8-2400.webp",
+          "srcset": "/projects/material-study-vol-1/08-8-960.webp 960w, /projects/material-study-vol-1/08-8-1600.webp 1600w, /projects/material-study-vol-1/08-8-2400.webp 2400w",
+          "width": 2400,
+          "height": 1582
+        },
+        {
+          "type": "image",
+          "src": "/projects/material-study-vol-1/09-9-2400.webp",
+          "srcset": "/projects/material-study-vol-1/09-9-960.webp 960w, /projects/material-study-vol-1/09-9-1600.webp 1600w, /projects/material-study-vol-1/09-9-2400.webp 2400w",
+          "width": 2400,
+          "height": 1582
+        },
+        {
+          "type": "image",
+          "src": "/projects/material-study-vol-1/10-10-2400.webp",
+          "srcset": "/projects/material-study-vol-1/10-10-960.webp 960w, /projects/material-study-vol-1/10-10-1600.webp 1600w, /projects/material-study-vol-1/10-10-2400.webp 2400w",
+          "width": 2400,
+          "height": 1582
+        },
+        {
+          "type": "image",
+          "src": "/projects/material-study-vol-1/11-11-2400.webp",
+          "srcset": "/projects/material-study-vol-1/11-11-960.webp 960w, /projects/material-study-vol-1/11-11-1600.webp 1600w, /projects/material-study-vol-1/11-11-2400.webp 2400w",
+          "width": 2400,
+          "height": 1582
+        },
+        {
+          "type": "image",
+          "src": "/projects/material-study-vol-1/12-12-2400.webp",
+          "srcset": "/projects/material-study-vol-1/12-12-960.webp 960w, /projects/material-study-vol-1/12-12-1600.webp 1600w, /projects/material-study-vol-1/12-12-2400.webp 2400w",
+          "width": 2400,
+          "height": 1582
+        },
+        {
+          "type": "image",
+          "src": "/projects/material-study-vol-1/13-13-2400.webp",
+          "srcset": "/projects/material-study-vol-1/13-13-960.webp 960w, /projects/material-study-vol-1/13-13-1600.webp 1600w, /projects/material-study-vol-1/13-13-2400.webp 2400w",
+          "width": 2400,
+          "height": 1582
+        },
+        {
+          "type": "image",
+          "src": "/projects/material-study-vol-1/14-14-2400.webp",
+          "srcset": "/projects/material-study-vol-1/14-14-960.webp 960w, /projects/material-study-vol-1/14-14-1600.webp 1600w, /projects/material-study-vol-1/14-14-2400.webp 2400w",
+          "width": 2400,
+          "height": 1582
+        }
+      ]
+    },
+    {
+      "slug": "pubgx-fifa-promotional-video-character-concept",
+      "title": "PUBGX FIFA promotional video character concept",
+      "category": "concept-art",
+      "number": null,
+      "folder": "PUBGX FIFA promotional video character concept",
+      "behance": "https://www.behance.net/gallery/251039835/BGMI-x-FIFA-World-Cup-Campaign-Animation-concept-art",
+      "description": "# BGMI x FIFA World Cup Campaign | Character Design & Promotional Illustration\n\nThis project was created for a promotional animation campaign inspired by the FIFA World Cup, developed by Picsodian Studios in collaboration with BGMI (Battlegrounds Mobile India) and Krafton.\n\nMy role involved designing and illustrating the main football-inspired characters featured in the campaign, including character turnarounds, expression sheets, supporting characters, props. The objective was to create a vibrant cast of young football enthusiasts while maintaining a stylized visual language that would work effectively in both animation and promotional materials.\n\nThe project required developing characters with distinct personalities, recognizable silhouettes, and animation-friendly designs. Alongside the original football characters, the campaign also incorporated BGMI-inspired characters adapted to match the overall visual style.",
+      "thumbnail": {
+        "src": "/projects/pubgx-fifa-promotional-video-character-concept/thumbnail-1200.webp",
+        "srcset": "/projects/pubgx-fifa-promotional-video-character-concept/thumbnail-640.webp 640w, /projects/pubgx-fifa-promotional-video-character-concept/thumbnail-1200.webp 1200w"
+      },
+      "media": [
+        {
+          "type": "image",
+          "src": "/projects/pubgx-fifa-promotional-video-character-concept/01-1-1920.webp",
+          "srcset": "/projects/pubgx-fifa-promotional-video-character-concept/01-1-960.webp 960w, /projects/pubgx-fifa-promotional-video-character-concept/01-1-1600.webp 1600w, /projects/pubgx-fifa-promotional-video-character-concept/01-1-1920.webp 1920w",
+          "width": 1920,
+          "height": 1179
+        },
+        {
+          "type": "image",
+          "src": "/projects/pubgx-fifa-promotional-video-character-concept/02-2-1920.webp",
+          "srcset": "/projects/pubgx-fifa-promotional-video-character-concept/02-2-960.webp 960w, /projects/pubgx-fifa-promotional-video-character-concept/02-2-1600.webp 1600w, /projects/pubgx-fifa-promotional-video-character-concept/02-2-1920.webp 1920w",
+          "width": 1920,
+          "height": 328
+        },
+        {
+          "type": "image",
+          "src": "/projects/pubgx-fifa-promotional-video-character-concept/03-3-1920.webp",
+          "srcset": "/projects/pubgx-fifa-promotional-video-character-concept/03-3-960.webp 960w, /projects/pubgx-fifa-promotional-video-character-concept/03-3-1600.webp 1600w, /projects/pubgx-fifa-promotional-video-character-concept/03-3-1920.webp 1920w",
+          "width": 1920,
+          "height": 3549
+        },
+        {
+          "type": "image",
+          "src": "/projects/pubgx-fifa-promotional-video-character-concept/04-4-1920.webp",
+          "srcset": "/projects/pubgx-fifa-promotional-video-character-concept/04-4-960.webp 960w, /projects/pubgx-fifa-promotional-video-character-concept/04-4-1600.webp 1600w, /projects/pubgx-fifa-promotional-video-character-concept/04-4-1920.webp 1920w",
+          "width": 1920,
+          "height": 1961
+        },
+        {
+          "type": "image",
+          "src": "/projects/pubgx-fifa-promotional-video-character-concept/05-5-1920.webp",
+          "srcset": "/projects/pubgx-fifa-promotional-video-character-concept/05-5-960.webp 960w, /projects/pubgx-fifa-promotional-video-character-concept/05-5-1600.webp 1600w, /projects/pubgx-fifa-promotional-video-character-concept/05-5-1920.webp 1920w",
+          "width": 1920,
+          "height": 1961
+        },
+        {
+          "type": "image",
+          "src": "/projects/pubgx-fifa-promotional-video-character-concept/06-6-1920.webp",
+          "srcset": "/projects/pubgx-fifa-promotional-video-character-concept/06-6-960.webp 960w, /projects/pubgx-fifa-promotional-video-character-concept/06-6-1600.webp 1600w, /projects/pubgx-fifa-promotional-video-character-concept/06-6-1920.webp 1920w",
+          "width": 1920,
+          "height": 1961
+        },
+        {
+          "type": "image",
+          "src": "/projects/pubgx-fifa-promotional-video-character-concept/07-7-1920.webp",
+          "srcset": "/projects/pubgx-fifa-promotional-video-character-concept/07-7-960.webp 960w, /projects/pubgx-fifa-promotional-video-character-concept/07-7-1600.webp 1600w, /projects/pubgx-fifa-promotional-video-character-concept/07-7-1920.webp 1920w",
+          "width": 1920,
+          "height": 1961
+        },
+        {
+          "type": "image",
+          "src": "/projects/pubgx-fifa-promotional-video-character-concept/08-8-1920.webp",
+          "srcset": "/projects/pubgx-fifa-promotional-video-character-concept/08-8-960.webp 960w, /projects/pubgx-fifa-promotional-video-character-concept/08-8-1600.webp 1600w, /projects/pubgx-fifa-promotional-video-character-concept/08-8-1920.webp 1920w",
+          "width": 1920,
+          "height": 1277
+        },
+        {
+          "type": "image",
+          "src": "/projects/pubgx-fifa-promotional-video-character-concept/09-9-1920.webp",
+          "srcset": "/projects/pubgx-fifa-promotional-video-character-concept/09-9-960.webp 960w, /projects/pubgx-fifa-promotional-video-character-concept/09-9-1600.webp 1600w, /projects/pubgx-fifa-promotional-video-character-concept/09-9-1920.webp 1920w",
+          "width": 1920,
+          "height": 2958
+        },
+        {
+          "type": "image",
+          "src": "/projects/pubgx-fifa-promotional-video-character-concept/10-10-1920.webp",
+          "srcset": "/projects/pubgx-fifa-promotional-video-character-concept/10-10-960.webp 960w, /projects/pubgx-fifa-promotional-video-character-concept/10-10-1600.webp 1600w, /projects/pubgx-fifa-promotional-video-character-concept/10-10-1920.webp 1920w",
+          "width": 1920,
+          "height": 993
+        },
+        {
+          "type": "youtube",
+          "id": "AZBzQnUu6qw",
+          "width": 16,
+          "height": 9
+        },
+        {
+          "type": "image",
+          "src": "/projects/pubgx-fifa-promotional-video-character-concept/12-11-1920.webp",
+          "srcset": "/projects/pubgx-fifa-promotional-video-character-concept/12-11-960.webp 960w, /projects/pubgx-fifa-promotional-video-character-concept/12-11-1600.webp 1600w, /projects/pubgx-fifa-promotional-video-character-concept/12-11-1920.webp 1920w",
+          "width": 1920,
+          "height": 395
+        }
+      ]
+    },
+    {
+      "slug": "blind-an-animation-concept",
+      "title": "BLIND - an animation concept",
+      "category": "concept-art",
+      "number": null,
+      "folder": "BLIND - an animation concept",
+      "behance": "https://www.behance.net/gallery/230883735/BLIND-An-animation-movie-concept",
+      "description": null,
+      "thumbnail": {
+        "src": "/projects/blind-an-animation-concept/thumbnail-1200.webp",
+        "srcset": "/projects/blind-an-animation-concept/thumbnail-640.webp 640w, /projects/blind-an-animation-concept/thumbnail-1200.webp 1200w"
+      },
+      "media": [
+        {
+          "type": "image",
+          "src": "/projects/blind-an-animation-concept/01-1-1920.webp",
+          "srcset": "/projects/blind-an-animation-concept/01-1-960.webp 960w, /projects/blind-an-animation-concept/01-1-1600.webp 1600w, /projects/blind-an-animation-concept/01-1-1920.webp 1920w",
+          "width": 1920,
+          "height": 923
+        },
+        {
+          "type": "image",
+          "src": "/projects/blind-an-animation-concept/02-2-1920.webp",
+          "srcset": "/projects/blind-an-animation-concept/02-2-960.webp 960w, /projects/blind-an-animation-concept/02-2-1600.webp 1600w, /projects/blind-an-animation-concept/02-2-1920.webp 1920w",
+          "width": 1920,
+          "height": 766
+        },
+        {
+          "type": "image",
+          "src": "/projects/blind-an-animation-concept/03-3-1920.webp",
+          "srcset": "/projects/blind-an-animation-concept/03-3-960.webp 960w, /projects/blind-an-animation-concept/03-3-1600.webp 1600w, /projects/blind-an-animation-concept/03-3-1920.webp 1920w",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "type": "image",
+          "src": "/projects/blind-an-animation-concept/04-4-1920.webp",
+          "srcset": "/projects/blind-an-animation-concept/04-4-960.webp 960w, /projects/blind-an-animation-concept/04-4-1600.webp 1600w, /projects/blind-an-animation-concept/04-4-1920.webp 1920w",
+          "width": 1920,
+          "height": 1277
+        },
+        {
+          "type": "image",
+          "src": "/projects/blind-an-animation-concept/05-5-1920.webp",
+          "srcset": "/projects/blind-an-animation-concept/05-5-960.webp 960w, /projects/blind-an-animation-concept/05-5-1600.webp 1600w, /projects/blind-an-animation-concept/05-5-1920.webp 1920w",
+          "width": 1920,
+          "height": 1236
+        },
+        {
+          "type": "image",
+          "src": "/projects/blind-an-animation-concept/06-6-1920.webp",
+          "srcset": "/projects/blind-an-animation-concept/06-6-960.webp 960w, /projects/blind-an-animation-concept/06-6-1600.webp 1600w, /projects/blind-an-animation-concept/06-6-1920.webp 1920w",
+          "width": 1920,
+          "height": 1236
+        },
+        {
+          "type": "image",
+          "src": "/projects/blind-an-animation-concept/07-7-1920.webp",
+          "srcset": "/projects/blind-an-animation-concept/07-7-960.webp 960w, /projects/blind-an-animation-concept/07-7-1600.webp 1600w, /projects/blind-an-animation-concept/07-7-1920.webp 1920w",
+          "width": 1920,
+          "height": 1236
+        },
+        {
+          "type": "image",
+          "src": "/projects/blind-an-animation-concept/08-8-1920.webp",
+          "srcset": "/projects/blind-an-animation-concept/08-8-960.webp 960w, /projects/blind-an-animation-concept/08-8-1600.webp 1600w, /projects/blind-an-animation-concept/08-8-1920.webp 1920w",
+          "width": 1920,
+          "height": 655
+        }
+      ]
+    },
+    {
+      "slug": "believe-thesis-film",
+      "title": "Believe-Thesis film",
+      "category": "concept-art",
+      "number": null,
+      "folder": "Believe-Thesis film",
+      "behance": "https://www.behance.net/gallery/200586351/Believe-A-short-animation-(thesis-project)",
+      "description": null,
+      "thumbnail": {
+        "src": "/projects/believe-thesis-film/thumbnail-1200.webp",
+        "srcset": "/projects/believe-thesis-film/thumbnail-640.webp 640w, /projects/believe-thesis-film/thumbnail-1200.webp 1200w"
+      },
+      "media": [
+        {
+          "type": "image",
+          "src": "/projects/believe-thesis-film/01-1-1920.webp",
+          "srcset": "/projects/believe-thesis-film/01-1-960.webp 960w, /projects/believe-thesis-film/01-1-1600.webp 1600w, /projects/believe-thesis-film/01-1-1920.webp 1920w",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "type": "video",
+          "src": "/projects/believe-thesis-film/02-2.mp4",
+          "poster": "/projects/believe-thesis-film/02-2-poster.webp",
+          "width": 1920,
+          "height": 795,
+          "loop": true
+        },
+        {
+          "type": "youtube",
+          "id": "jjK6dqDDz28",
+          "width": 16,
+          "height": 9
+        },
+        {
+          "type": "image",
+          "src": "/projects/believe-thesis-film/04-3-1920.webp",
+          "srcset": "/projects/believe-thesis-film/04-3-960.webp 960w, /projects/believe-thesis-film/04-3-1600.webp 1600w, /projects/believe-thesis-film/04-3-1920.webp 1920w",
+          "width": 1920,
+          "height": 921
+        },
+        {
+          "type": "video",
+          "src": "/projects/believe-thesis-film/05-4.mp4",
+          "poster": "/projects/believe-thesis-film/05-4-poster.webp",
+          "width": 1920,
+          "height": 514,
+          "loop": true
+        },
+        {
+          "type": "image",
+          "src": "/projects/believe-thesis-film/06-5-1920.webp",
+          "srcset": "/projects/believe-thesis-film/06-5-960.webp 960w, /projects/believe-thesis-film/06-5-1600.webp 1600w, /projects/believe-thesis-film/06-5-1920.webp 1920w",
+          "width": 1920,
+          "height": 1237
+        },
+        {
+          "type": "image",
+          "src": "/projects/believe-thesis-film/07-6-1920.webp",
+          "srcset": "/projects/believe-thesis-film/07-6-960.webp 960w, /projects/believe-thesis-film/07-6-1600.webp 1600w, /projects/believe-thesis-film/07-6-1920.webp 1920w",
+          "width": 1920,
+          "height": 2794
+        },
+        {
+          "type": "video",
+          "src": "/projects/believe-thesis-film/08-narration-style.mp4",
+          "poster": "/projects/believe-thesis-film/08-narration-style-poster.webp",
+          "width": 1920,
+          "height": 1059,
+          "loop": true
+        },
+        {
+          "type": "image",
+          "src": "/projects/believe-thesis-film/09-8-1920.webp",
+          "srcset": "/projects/believe-thesis-film/09-8-960.webp 960w, /projects/believe-thesis-film/09-8-1600.webp 1600w, /projects/believe-thesis-film/09-8-1920.webp 1920w",
+          "width": 1920,
+          "height": 2682
+        },
+        {
+          "type": "video",
+          "src": "/projects/believe-thesis-film/10-9.mp4",
+          "poster": "/projects/believe-thesis-film/10-9-poster.webp",
+          "width": 1920,
+          "height": 848,
+          "loop": true
+        },
+        {
+          "type": "image",
+          "src": "/projects/believe-thesis-film/11-10-1920.webp",
+          "srcset": "/projects/believe-thesis-film/11-10-960.webp 960w, /projects/believe-thesis-film/11-10-1600.webp 1600w, /projects/believe-thesis-film/11-10-1920.webp 1920w",
+          "width": 1920,
+          "height": 4765
+        },
+        {
+          "type": "video",
+          "src": "/projects/believe-thesis-film/12-last-page.mp4",
+          "poster": "/projects/believe-thesis-film/12-last-page-poster.webp",
+          "width": 1920,
+          "height": 848,
+          "loop": true
+        }
+      ]
+    },
+    {
+      "slug": "arcado-battle-game-art-portfolio",
+      "title": "Arcado Battle - Game art portfolio",
+      "category": "game-art",
+      "number": null,
+      "folder": "Arcado Battle - Game art portfolio",
+      "behance": "https://www.behance.net/gallery/242474283/ARCADO-BATTLE-GAME-ART-UIUX-PORTFOLIO",
+      "description": "This showcase features my 2D art, UI/UX design, and creative direction for Arcado Battle, a fast-paced, casual mobile MOBA by Gapelabs.\n\nThe goal was to create a cohesive visual identity that bridges the gap between mid-core strategy and casual appeal. This project covers the entire art pipeline, from initial character sketches and prop designs to the final UI systems and marketing assets.",
+      "thumbnail": {
+        "src": "/projects/arcado-battle-game-art-portfolio/thumbnail-1200.webp",
+        "srcset": "/projects/arcado-battle-game-art-portfolio/thumbnail-640.webp 640w, /projects/arcado-battle-game-art-portfolio/thumbnail-1200.webp 1200w"
+      },
+      "media": [
+        {
+          "type": "video",
+          "src": "/projects/arcado-battle-game-art-portfolio/01-1.mp4",
+          "poster": "/projects/arcado-battle-game-art-portfolio/01-1-poster.webp",
+          "width": 1920,
+          "height": 1170,
+          "loop": true
+        },
+        {
+          "type": "video",
+          "src": "/projects/arcado-battle-game-art-portfolio/02-2.mp4",
+          "poster": "/projects/arcado-battle-game-art-portfolio/02-2-poster.webp",
+          "width": 1920,
+          "height": 702,
+          "loop": true
+        },
+        {
+          "type": "image",
+          "src": "/projects/arcado-battle-game-art-portfolio/03-3-1920.webp",
+          "srcset": "/projects/arcado-battle-game-art-portfolio/03-3-960.webp 960w, /projects/arcado-battle-game-art-portfolio/03-3-1600.webp 1600w, /projects/arcado-battle-game-art-portfolio/03-3-1920.webp 1920w",
+          "width": 1920,
+          "height": 3036
+        },
+        {
+          "type": "image",
+          "src": "/projects/arcado-battle-game-art-portfolio/04-4-1920.webp",
+          "srcset": "/projects/arcado-battle-game-art-portfolio/04-4-960.webp 960w, /projects/arcado-battle-game-art-portfolio/04-4-1600.webp 1600w, /projects/arcado-battle-game-art-portfolio/04-4-1920.webp 1920w",
+          "width": 1920,
+          "height": 2816
+        },
+        {
+          "type": "image",
+          "src": "/projects/arcado-battle-game-art-portfolio/05-5-1920.webp",
+          "srcset": "/projects/arcado-battle-game-art-portfolio/05-5-960.webp 960w, /projects/arcado-battle-game-art-portfolio/05-5-1600.webp 1600w, /projects/arcado-battle-game-art-portfolio/05-5-1920.webp 1920w",
+          "width": 1920,
+          "height": 2121
+        },
+        {
+          "type": "video",
+          "src": "/projects/arcado-battle-game-art-portfolio/06-pg-temp-new.mp4",
+          "poster": "/projects/arcado-battle-game-art-portfolio/06-pg-temp-new-poster.webp",
+          "width": 1920,
+          "height": 702,
+          "loop": true
+        },
+        {
+          "type": "video",
+          "src": "/projects/arcado-battle-game-art-portfolio/07-pg-temp-new-2.mp4",
+          "poster": "/projects/arcado-battle-game-art-portfolio/07-pg-temp-new-2-poster.webp",
+          "width": 1920,
+          "height": 702,
+          "loop": true
+        },
+        {
+          "type": "video",
+          "src": "/projects/arcado-battle-game-art-portfolio/08-anim-page-2.mp4",
+          "poster": "/projects/arcado-battle-game-art-portfolio/08-anim-page-2-poster.webp",
+          "width": 1920,
+          "height": 702,
+          "loop": true
+        },
+        {
+          "type": "video",
+          "src": "/projects/arcado-battle-game-art-portfolio/09-emotes-from-behance.mp4",
+          "poster": "/projects/arcado-battle-game-art-portfolio/09-emotes-from-behance-poster.webp",
+          "width": 1920,
+          "height": 1236,
+          "loop": true
+        },
+        {
+          "type": "image",
+          "src": "/projects/arcado-battle-game-art-portfolio/10-9-1920.webp",
+          "srcset": "/projects/arcado-battle-game-art-portfolio/10-9-960.webp 960w, /projects/arcado-battle-game-art-portfolio/10-9-1600.webp 1600w, /projects/arcado-battle-game-art-portfolio/10-9-1920.webp 1920w",
+          "width": 1920,
+          "height": 2816
+        },
+        {
+          "type": "image",
+          "src": "/projects/arcado-battle-game-art-portfolio/11-10-1920.webp",
+          "srcset": "/projects/arcado-battle-game-art-portfolio/11-10-960.webp 960w, /projects/arcado-battle-game-art-portfolio/11-10-1600.webp 1600w, /projects/arcado-battle-game-art-portfolio/11-10-1920.webp 1920w",
+          "width": 1920,
+          "height": 1703
+        },
+        {
+          "type": "image",
+          "src": "/projects/arcado-battle-game-art-portfolio/12-11-1920.webp",
+          "srcset": "/projects/arcado-battle-game-art-portfolio/12-11-960.webp 960w, /projects/arcado-battle-game-art-portfolio/12-11-1600.webp 1600w, /projects/arcado-battle-game-art-portfolio/12-11-1920.webp 1920w",
+          "width": 1920,
+          "height": 2084
+        },
+        {
+          "type": "image",
+          "src": "/projects/arcado-battle-game-art-portfolio/13-12-1920.webp",
+          "srcset": "/projects/arcado-battle-game-art-portfolio/13-12-960.webp 960w, /projects/arcado-battle-game-art-portfolio/13-12-1600.webp 1600w, /projects/arcado-battle-game-art-portfolio/13-12-1920.webp 1920w",
+          "width": 1920,
+          "height": 2816
+        },
+        {
+          "type": "image",
+          "src": "/projects/arcado-battle-game-art-portfolio/14-13-1920.webp",
+          "srcset": "/projects/arcado-battle-game-art-portfolio/14-13-960.webp 960w, /projects/arcado-battle-game-art-portfolio/14-13-1600.webp 1600w, /projects/arcado-battle-game-art-portfolio/14-13-1920.webp 1920w",
+          "width": 1920,
+          "height": 2680
+        },
+        {
+          "type": "image",
+          "src": "/projects/arcado-battle-game-art-portfolio/15-14-1920.webp",
+          "srcset": "/projects/arcado-battle-game-art-portfolio/15-14-960.webp 960w, /projects/arcado-battle-game-art-portfolio/15-14-1600.webp 1600w, /projects/arcado-battle-game-art-portfolio/15-14-1920.webp 1920w",
+          "width": 1920,
+          "height": 2515
+        },
+        {
+          "type": "image",
+          "src": "/projects/arcado-battle-game-art-portfolio/16-15-1920.webp",
+          "srcset": "/projects/arcado-battle-game-art-portfolio/16-15-960.webp 960w, /projects/arcado-battle-game-art-portfolio/16-15-1600.webp 1600w, /projects/arcado-battle-game-art-portfolio/16-15-1920.webp 1920w",
+          "width": 1920,
+          "height": 2515
+        },
+        {
+          "type": "image",
+          "src": "/projects/arcado-battle-game-art-portfolio/17-16-1920.webp",
+          "srcset": "/projects/arcado-battle-game-art-portfolio/17-16-960.webp 960w, /projects/arcado-battle-game-art-portfolio/17-16-1600.webp 1600w, /projects/arcado-battle-game-art-portfolio/17-16-1920.webp 1920w",
+          "width": 1920,
+          "height": 2599
+        },
+        {
+          "type": "image",
+          "src": "/projects/arcado-battle-game-art-portfolio/18-17-1920.webp",
+          "srcset": "/projects/arcado-battle-game-art-portfolio/18-17-960.webp 960w, /projects/arcado-battle-game-art-portfolio/18-17-1600.webp 1600w, /projects/arcado-battle-game-art-portfolio/18-17-1920.webp 1920w",
+          "width": 1920,
+          "height": 2856
+        },
+        {
+          "type": "video",
+          "src": "/projects/arcado-battle-game-art-portfolio/19-thankyou.mp4",
+          "poster": "/projects/arcado-battle-game-art-portfolio/19-thankyou-poster.webp",
+          "width": 1920,
+          "height": 1017,
+          "loop": true
+        },
+        {
+          "type": "image",
+          "src": "/projects/arcado-battle-game-art-portfolio/20-copyright-strip-from-behance-2400.webp",
+          "srcset": "/projects/arcado-battle-game-art-portfolio/20-copyright-strip-from-behance-960.webp 960w, /projects/arcado-battle-game-art-portfolio/20-copyright-strip-from-behance-1600.webp 1600w, /projects/arcado-battle-game-art-portfolio/20-copyright-strip-from-behance-2400.webp 2400w",
+          "width": 2400,
+          "height": 148
+        }
+      ]
+    },
+    {
+      "slug": "arcado-battle-new-character-concept",
+      "title": "Arcado Battle - New character Concept",
+      "category": "game-art",
+      "number": null,
+      "folder": "Arcado Battle - New character Concept",
+      "behance": "https://www.behance.net/gallery/229268281/Arcado-Champs-New-game-character-concepts",
+      "description": null,
+      "thumbnail": {
+        "src": "/projects/arcado-battle-new-character-concept/thumbnail-1200.webp",
+        "srcset": "/projects/arcado-battle-new-character-concept/thumbnail-640.webp 640w, /projects/arcado-battle-new-character-concept/thumbnail-1200.webp 1200w"
+      },
+      "media": [
+        {
+          "type": "image",
+          "src": "/projects/arcado-battle-new-character-concept/01-cover-2068.webp",
+          "srcset": "/projects/arcado-battle-new-character-concept/01-cover-960.webp 960w, /projects/arcado-battle-new-character-concept/01-cover-1600.webp 1600w, /projects/arcado-battle-new-character-concept/01-cover-2068.webp 2068w",
+          "width": 2068,
+          "height": 1242
+        },
+        {
+          "type": "image",
+          "src": "/projects/arcado-battle-new-character-concept/02-1-1081.webp",
+          "srcset": "/projects/arcado-battle-new-character-concept/02-1-960.webp 960w, /projects/arcado-battle-new-character-concept/02-1-1081.webp 1081w",
+          "width": 1081,
+          "height": 1350
+        },
+        {
+          "type": "image",
+          "src": "/projects/arcado-battle-new-character-concept/03-2-1080.webp",
+          "srcset": "/projects/arcado-battle-new-character-concept/03-2-960.webp 960w, /projects/arcado-battle-new-character-concept/03-2-1080.webp 1080w",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "type": "image",
+          "src": "/projects/arcado-battle-new-character-concept/04-3-1081.webp",
+          "srcset": "/projects/arcado-battle-new-character-concept/04-3-960.webp 960w, /projects/arcado-battle-new-character-concept/04-3-1081.webp 1081w",
+          "width": 1081,
+          "height": 1350
+        },
+        {
+          "type": "image",
+          "src": "/projects/arcado-battle-new-character-concept/05-4-1080.webp",
+          "srcset": "/projects/arcado-battle-new-character-concept/05-4-960.webp 960w, /projects/arcado-battle-new-character-concept/05-4-1080.webp 1080w",
+          "width": 1080,
+          "height": 405
+        }
+      ]
+    },
+    {
+      "slug": "emote-collections",
+      "title": "Emote collections",
+      "category": "game-art",
+      "number": null,
+      "folder": "Emote collections",
+      "behance": "https://www.behance.net/gallery/231036629/Arcado-Champs-emotes-collection",
+      "description": null,
+      "thumbnail": {
+        "src": "/projects/emote-collections/thumbnail-1200.webp",
+        "srcset": "/projects/emote-collections/thumbnail-640.webp 640w, /projects/emote-collections/thumbnail-1200.webp 1200w"
+      },
+      "media": [
+        {
+          "type": "image",
+          "src": "/projects/emote-collections/01-cover-1674.webp",
+          "srcset": "/projects/emote-collections/01-cover-960.webp 960w, /projects/emote-collections/01-cover-1600.webp 1600w, /projects/emote-collections/01-cover-1674.webp 1674w",
+          "width": 1674,
+          "height": 1080
+        },
+        {
+          "type": "image",
+          "src": "/projects/emote-collections/02-1-1674.webp",
+          "srcset": "/projects/emote-collections/02-1-960.webp 960w, /projects/emote-collections/02-1-1600.webp 1600w, /projects/emote-collections/02-1-1674.webp 1674w",
+          "width": 1674,
+          "height": 224
+        },
+        {
+          "type": "video",
+          "src": "/projects/emote-collections/03-2.mp4",
+          "poster": "/projects/emote-collections/03-2-poster.webp",
+          "width": 1674,
+          "height": 1080,
+          "loop": true
+        },
+        {
+          "type": "video",
+          "src": "/projects/emote-collections/04-9.mp4",
+          "poster": "/projects/emote-collections/04-9-poster.webp",
+          "width": 1674,
+          "height": 1080,
+          "loop": true
+        },
+        {
+          "type": "video",
+          "src": "/projects/emote-collections/05-3.mp4",
+          "poster": "/projects/emote-collections/05-3-poster.webp",
+          "width": 1674,
+          "height": 1080,
+          "loop": true
+        },
+        {
+          "type": "video",
+          "src": "/projects/emote-collections/06-10.mp4",
+          "poster": "/projects/emote-collections/06-10-poster.webp",
+          "width": 1674,
+          "height": 1080,
+          "loop": true
+        },
+        {
+          "type": "video",
+          "src": "/projects/emote-collections/07-5.mp4",
+          "poster": "/projects/emote-collections/07-5-poster.webp",
+          "width": 1674,
+          "height": 1080,
+          "loop": true
+        },
+        {
+          "type": "video",
+          "src": "/projects/emote-collections/08-6.mp4",
+          "poster": "/projects/emote-collections/08-6-poster.webp",
+          "width": 1674,
+          "height": 1080,
+          "loop": true
+        },
+        {
+          "type": "video",
+          "src": "/projects/emote-collections/09-4.mp4",
+          "poster": "/projects/emote-collections/09-4-poster.webp",
+          "width": 1674,
+          "height": 1080,
+          "loop": true
+        },
+        {
+          "type": "video",
+          "src": "/projects/emote-collections/10-7.mp4",
+          "poster": "/projects/emote-collections/10-7-poster.webp",
+          "width": 1674,
+          "height": 1080,
+          "loop": true
+        },
+        {
+          "type": "video",
+          "src": "/projects/emote-collections/11-11.mp4",
+          "poster": "/projects/emote-collections/11-11-poster.webp",
+          "width": 1674,
+          "height": 1080,
+          "loop": true
+        },
+        {
+          "type": "video",
+          "src": "/projects/emote-collections/12-8.mp4",
+          "poster": "/projects/emote-collections/12-8-poster.webp",
+          "width": 1674,
+          "height": 1080,
+          "loop": true
+        },
+        {
+          "type": "image",
+          "src": "/projects/emote-collections/13-end-1674.webp",
+          "srcset": "/projects/emote-collections/13-end-960.webp 960w, /projects/emote-collections/13-end-1600.webp 1600w, /projects/emote-collections/13-end-1674.webp 1674w",
+          "width": 1674,
+          "height": 630
+        }
+      ]
+    },
+    {
+      "slug": "the-planet-ai-short",
+      "title": "THE PLANET [AI SHORT]",
+      "category": "graphics-ai",
+      "number": null,
+      "folder": "THE PLANET [AI SHORT]",
+      "behance": "https://www.behance.net/gallery/237410827/The-Planet-An-AI-Short-Animation",
+      "description": "The Planet is a sci-fi mystery short film created entirely with AI tools — Google Veo and Google Flow. This experimental short dives into the haunting beauty of a world left behind, blending themes of environmental decay, cosmic mystery, and human introspection.\n\nThrough painterly visuals and cinematic storytelling, The Planet explores what remains when civilizations fade — and what it means to witness the echoes of our own world from afar.\nGenre: Sci-Fi | Mystery | Environmental\nCreated using: Google Veo (AI video) & Google Flow (AI composition)\nScore: AI-generated ambient orchestral soundtrack\nDirected by: Ananthkrishnan",
+      "thumbnail": {
+        "src": "/projects/the-planet-ai-short/thumbnail-1200.webp",
+        "srcset": "/projects/the-planet-ai-short/thumbnail-640.webp 640w, /projects/the-planet-ai-short/thumbnail-1200.webp 1200w"
+      },
+      "media": [
+        {
+          "type": "image",
+          "src": "/projects/the-planet-ai-short/01-slide-16-9-1-1920.webp",
+          "srcset": "/projects/the-planet-ai-short/01-slide-16-9-1-960.webp 960w, /projects/the-planet-ai-short/01-slide-16-9-1-1600.webp 1600w, /projects/the-planet-ai-short/01-slide-16-9-1-1920.webp 1920w",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "type": "youtube",
+          "id": "5CAc3bEJTTU",
+          "width": 16,
+          "height": 9
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-planet-ai-short/03-slide-16-9-2-1920.webp",
+          "srcset": "/projects/the-planet-ai-short/03-slide-16-9-2-960.webp 960w, /projects/the-planet-ai-short/03-slide-16-9-2-1600.webp 1600w, /projects/the-planet-ai-short/03-slide-16-9-2-1920.webp 1920w",
+          "width": 1920,
+          "height": 642
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-planet-ai-short/04-slide-16-9-3-1920.webp",
+          "srcset": "/projects/the-planet-ai-short/04-slide-16-9-3-960.webp 960w, /projects/the-planet-ai-short/04-slide-16-9-3-1600.webp 1600w, /projects/the-planet-ai-short/04-slide-16-9-3-1920.webp 1920w",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-planet-ai-short/05-slide-16-9-4-1920.webp",
+          "srcset": "/projects/the-planet-ai-short/05-slide-16-9-4-960.webp 960w, /projects/the-planet-ai-short/05-slide-16-9-4-1600.webp 1600w, /projects/the-planet-ai-short/05-slide-16-9-4-1920.webp 1920w",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-planet-ai-short/06-slide-16-9-5-1920.webp",
+          "srcset": "/projects/the-planet-ai-short/06-slide-16-9-5-960.webp 960w, /projects/the-planet-ai-short/06-slide-16-9-5-1600.webp 1600w, /projects/the-planet-ai-short/06-slide-16-9-5-1920.webp 1920w",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-planet-ai-short/07-slide-16-9-6-1920.webp",
+          "srcset": "/projects/the-planet-ai-short/07-slide-16-9-6-960.webp 960w, /projects/the-planet-ai-short/07-slide-16-9-6-1600.webp 1600w, /projects/the-planet-ai-short/07-slide-16-9-6-1920.webp 1920w",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-planet-ai-short/08-slide-16-9-7-1920.webp",
+          "srcset": "/projects/the-planet-ai-short/08-slide-16-9-7-960.webp 960w, /projects/the-planet-ai-short/08-slide-16-9-7-1600.webp 1600w, /projects/the-planet-ai-short/08-slide-16-9-7-1920.webp 1920w",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-planet-ai-short/09-slide-16-9-8-1920.webp",
+          "srcset": "/projects/the-planet-ai-short/09-slide-16-9-8-960.webp 960w, /projects/the-planet-ai-short/09-slide-16-9-8-1600.webp 1600w, /projects/the-planet-ai-short/09-slide-16-9-8-1920.webp 1920w",
+          "width": 1920,
+          "height": 1248
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-planet-ai-short/10-slide-16-9-9-1920.webp",
+          "srcset": "/projects/the-planet-ai-short/10-slide-16-9-9-960.webp 960w, /projects/the-planet-ai-short/10-slide-16-9-9-1600.webp 1600w, /projects/the-planet-ai-short/10-slide-16-9-9-1920.webp 1920w",
+          "width": 1920,
+          "height": 1248
+        }
+      ]
+    },
+    {
+      "slug": "the-christmas-run-ai-short",
+      "title": "THE CHRISTMAS RUN [AI SHORT]",
+      "category": "graphics-ai",
+      "number": null,
+      "folder": "THE CHRISTMAS RUN [AI  SHORT]",
+      "behance": "https://www.behance.net/gallery/241087771/THE-CHRISTMAS-RUN-ft-NIKE-fanmade-AI-Ad",
+      "description": "When the reindeer go on strike and the clock is ticking, Santa Claus has to find a new way to fly. This is a fan-made concept exploring what a holiday campaign would look like if Santa was the ultimate Nike athlete.🎅❄️🎄\n\n🎬 Video Details:\nConcept & Edit: AK\nGenre: Spec Commercial / Cinematic AI Video\nResolution: 4K\n\n🛠️ Tools Used:\nVideo Generation: Veo\nImage Generation: Gemini pro\nMusic: Custom AI Mix\nEditing: Adobe Premiere Pro\n\n📝 Note: This is a non-commercial fan project created for educational and artistic purposes. This video is not affiliated with or endorsed by Nike.",
+      "thumbnail": {
+        "src": "/projects/the-christmas-run-ai-short/thumbnail-1200.webp",
+        "srcset": "/projects/the-christmas-run-ai-short/thumbnail-640.webp 640w, /projects/the-christmas-run-ai-short/thumbnail-1200.webp 1200w"
+      },
+      "media": [
+        {
+          "type": "image",
+          "src": "/projects/the-christmas-run-ai-short/01-cover-1920.webp",
+          "srcset": "/projects/the-christmas-run-ai-short/01-cover-960.webp 960w, /projects/the-christmas-run-ai-short/01-cover-1600.webp 1600w, /projects/the-christmas-run-ai-short/01-cover-1920.webp 1920w",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "type": "youtube",
+          "id": "mKdGGwfmfKQ",
+          "width": 16,
+          "height": 9
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-christmas-run-ai-short/03-slide-16-9-13-1920.webp",
+          "srcset": "/projects/the-christmas-run-ai-short/03-slide-16-9-13-960.webp 960w, /projects/the-christmas-run-ai-short/03-slide-16-9-13-1600.webp 1600w, /projects/the-christmas-run-ai-short/03-slide-16-9-13-1920.webp 1920w",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-christmas-run-ai-short/04-slide-16-9-15-1920.webp",
+          "srcset": "/projects/the-christmas-run-ai-short/04-slide-16-9-15-960.webp 960w, /projects/the-christmas-run-ai-short/04-slide-16-9-15-1600.webp 1600w, /projects/the-christmas-run-ai-short/04-slide-16-9-15-1920.webp 1920w",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-christmas-run-ai-short/05-slide-16-9-16-1920.webp",
+          "srcset": "/projects/the-christmas-run-ai-short/05-slide-16-9-16-960.webp 960w, /projects/the-christmas-run-ai-short/05-slide-16-9-16-1600.webp 1600w, /projects/the-christmas-run-ai-short/05-slide-16-9-16-1920.webp 1920w",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-christmas-run-ai-short/06-slide-16-9-17-1920.webp",
+          "srcset": "/projects/the-christmas-run-ai-short/06-slide-16-9-17-960.webp 960w, /projects/the-christmas-run-ai-short/06-slide-16-9-17-1600.webp 1600w, /projects/the-christmas-run-ai-short/06-slide-16-9-17-1920.webp 1920w",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-christmas-run-ai-short/07-slide-16-9-18-1920.webp",
+          "srcset": "/projects/the-christmas-run-ai-short/07-slide-16-9-18-960.webp 960w, /projects/the-christmas-run-ai-short/07-slide-16-9-18-1600.webp 1600w, /projects/the-christmas-run-ai-short/07-slide-16-9-18-1920.webp 1920w",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-christmas-run-ai-short/08-slide-16-9-19-1920.webp",
+          "srcset": "/projects/the-christmas-run-ai-short/08-slide-16-9-19-960.webp 960w, /projects/the-christmas-run-ai-short/08-slide-16-9-19-1600.webp 1600w, /projects/the-christmas-run-ai-short/08-slide-16-9-19-1920.webp 1920w",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-christmas-run-ai-short/09-slide-16-9-14-1920.webp",
+          "srcset": "/projects/the-christmas-run-ai-short/09-slide-16-9-14-960.webp 960w, /projects/the-christmas-run-ai-short/09-slide-16-9-14-1600.webp 1600w, /projects/the-christmas-run-ai-short/09-slide-16-9-14-1920.webp 1920w",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-christmas-run-ai-short/10-slide-16-9-20-1920.webp",
+          "srcset": "/projects/the-christmas-run-ai-short/10-slide-16-9-20-960.webp 960w, /projects/the-christmas-run-ai-short/10-slide-16-9-20-1600.webp 1600w, /projects/the-christmas-run-ai-short/10-slide-16-9-20-1920.webp 1920w",
+          "width": 1920,
+          "height": 679
+        }
+      ]
+    },
+    {
+      "slug": "the-golden-shackle",
+      "title": "The Golden Shackle",
+      "category": "graphics-ai",
+      "number": null,
+      "folder": "The Golden Shackle",
+      "behance": "https://www.behance.net/gallery/165518235/The-Golden-Shackle-a-comic-against-dowry",
+      "description": "This is a full hand drawn digital comic that in the topic of dowry and marriage.\nThe story have their own symbolic meaning through colors and character\nand each frames and each objects are related to the topic and how the situation of the girl through these stages.",
+      "thumbnail": {
+        "src": "/projects/the-golden-shackle/thumbnail-1200.webp",
+        "srcset": "/projects/the-golden-shackle/thumbnail-640.webp 640w, /projects/the-golden-shackle/thumbnail-1200.webp 1200w"
+      },
+      "media": [
+        {
+          "type": "image",
+          "src": "/projects/the-golden-shackle/01-01-2400.webp",
+          "srcset": "/projects/the-golden-shackle/01-01-960.webp 960w, /projects/the-golden-shackle/01-01-1600.webp 1600w, /projects/the-golden-shackle/01-01-2400.webp 2400w",
+          "width": 2400,
+          "height": 1516
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-golden-shackle/02-02-2400.webp",
+          "srcset": "/projects/the-golden-shackle/02-02-960.webp 960w, /projects/the-golden-shackle/02-02-1600.webp 1600w, /projects/the-golden-shackle/02-02-2400.webp 2400w",
+          "width": 2400,
+          "height": 1516
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-golden-shackle/03-03-2400.webp",
+          "srcset": "/projects/the-golden-shackle/03-03-960.webp 960w, /projects/the-golden-shackle/03-03-1600.webp 1600w, /projects/the-golden-shackle/03-03-2400.webp 2400w",
+          "width": 2400,
+          "height": 1516
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-golden-shackle/04-04-2400.webp",
+          "srcset": "/projects/the-golden-shackle/04-04-960.webp 960w, /projects/the-golden-shackle/04-04-1600.webp 1600w, /projects/the-golden-shackle/04-04-2400.webp 2400w",
+          "width": 2400,
+          "height": 1516
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-golden-shackle/05-05-2400.webp",
+          "srcset": "/projects/the-golden-shackle/05-05-960.webp 960w, /projects/the-golden-shackle/05-05-1600.webp 1600w, /projects/the-golden-shackle/05-05-2400.webp 2400w",
+          "width": 2400,
+          "height": 1516
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-golden-shackle/06-06-2400.webp",
+          "srcset": "/projects/the-golden-shackle/06-06-960.webp 960w, /projects/the-golden-shackle/06-06-1600.webp 1600w, /projects/the-golden-shackle/06-06-2400.webp 2400w",
+          "width": 2400,
+          "height": 1516
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-golden-shackle/07-07-2400.webp",
+          "srcset": "/projects/the-golden-shackle/07-07-960.webp 960w, /projects/the-golden-shackle/07-07-1600.webp 1600w, /projects/the-golden-shackle/07-07-2400.webp 2400w",
+          "width": 2400,
+          "height": 1516
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-golden-shackle/08-08-2400.webp",
+          "srcset": "/projects/the-golden-shackle/08-08-960.webp 960w, /projects/the-golden-shackle/08-08-1600.webp 1600w, /projects/the-golden-shackle/08-08-2400.webp 2400w",
+          "width": 2400,
+          "height": 1516
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-golden-shackle/09-09-2400.webp",
+          "srcset": "/projects/the-golden-shackle/09-09-960.webp 960w, /projects/the-golden-shackle/09-09-1600.webp 1600w, /projects/the-golden-shackle/09-09-2400.webp 2400w",
+          "width": 2400,
+          "height": 1516
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-golden-shackle/10-10-2400.webp",
+          "srcset": "/projects/the-golden-shackle/10-10-960.webp 960w, /projects/the-golden-shackle/10-10-1600.webp 1600w, /projects/the-golden-shackle/10-10-2400.webp 2400w",
+          "width": 2400,
+          "height": 1516
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-golden-shackle/11-11-2400.webp",
+          "srcset": "/projects/the-golden-shackle/11-11-960.webp 960w, /projects/the-golden-shackle/11-11-1600.webp 1600w, /projects/the-golden-shackle/11-11-2400.webp 2400w",
+          "width": 2400,
+          "height": 1516
+        },
+        {
+          "type": "image",
+          "src": "/projects/the-golden-shackle/12-12-2400.webp",
+          "srcset": "/projects/the-golden-shackle/12-12-960.webp 960w, /projects/the-golden-shackle/12-12-1600.webp 1600w, /projects/the-golden-shackle/12-12-2400.webp 2400w",
+          "width": 2400,
+          "height": 1516
+        }
+      ]
+    }
+  ]
+}
