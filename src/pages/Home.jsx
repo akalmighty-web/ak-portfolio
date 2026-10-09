@@ -152,7 +152,7 @@ export default function Home() {
         ))}
       </ul>
 
-      <div className="home-note home-anim" aria-label="Same kid, different worlds">
+      <div className="home-note home-anim" role="img" aria-label="Same kid, different worlds">
         <p aria-hidden="true">
           <span>“Same</span>
           <span>kid</span>
