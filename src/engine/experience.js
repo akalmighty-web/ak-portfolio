@@ -1,15 +1,16 @@
 import gsap from 'gsap'
-import { FRAMES, HOLDS, PAGES } from '../config'
+import { PAGES } from '../config'
 import { store } from './store'
 import { FramePlayer, pickSize } from './frames'
 import { FrameCache, loadFrames, loadStills } from './frameCache'
+import { wantedSet } from './frameSet'
 import { isScaled, onViewportChange } from './viewport'
 import { reducedMotion } from '../fx/env'
 
 const pos = { frame: 0 }
+let set = wantedSet() // the version of the animation shown (16:9, or 9:16 on phones held upright)
 let player = null
 let tween = null
-let framesReady = null
 let dir = 0 // which way the playhead is moving (+1 / -1), 0 at rest: steers the decode window
 let stride = 1 // 2 during long fast-forward jumps: only every other frame is decoded ahead
 const frameListeners = new Set()
@@ -33,12 +34,12 @@ function draw() {
 // single point. toMoving/toReal convert between that axis and real frames.
 function toMoving(frame) {
   let v = frame
-  for (const [s, e] of HOLDS) if (frame > s) v -= Math.min(frame, e) - s
+  for (const [s, e] of set.holds) if (frame > s) v -= Math.min(frame, e) - s
   return v
 }
 function toReal(v) {
   let frame = v
-  for (const [s, e] of HOLDS) if (frame > s) frame += e - s
+  for (const [s, e] of set.holds) if (frame > s) frame += e - s
   return frame
 }
 
@@ -57,38 +58,86 @@ const logoGate = new Promise((resolve) => {
 /** The preloader's logo video can play (called by the Preloader). */
 export const onLogoReady = () => logoReady()
 
+let resolveReady
+const framesReady = new Promise((r) => (resolveReady = r))
+
 /**
  * Start downloading the frame set (compressed). Called once, before React
  * renders. The intro can start as soon as its own frames are in and the first
  * few are decoded; the rest keeps downloading while it plays.
  */
 export function startLoading() {
-  const size = pickSize()
-  loader = loadFrames(
+  load()
+}
+
+/**
+ * Download `set` at the size for this screen. Again when the screen switches
+ * to the other set (a phone turned between upright and sideways): then the
+ * frames being shown come first, and the old set's frames are let go.
+ */
+function load() {
+  const size = pickSize(set)
+  const started = store.get().phase !== 'preload'
+  loader?.stop()
+  cache?.dispose()
+  stills?.drop()
+  const mine = (loader = loadFrames(
+    set,
     size,
     (p) => {
+      if (loader !== mine) return
       store.set({ loaded: p })
       cache?.refill()
     },
     logoGate,
-  )
-  cache = new FrameCache(loader.blobs, size * Math.round((size * 9) / 16) * 4, (f) => player?.refresh(f))
-  if (player) player.cache = cache
-  framesReady = loader.intro.then(async () => {
+    started ? [Math.round(pos.frame), ...PAGES.map((p) => p.frame)] : [],
+  ))
+  const aspect = set.id === 'portrait' ? 16 / 9 : 9 / 16
+  cache = new FrameCache(set, loader.blobs, size * Math.round(size * aspect) * 4, (f) => player?.refresh(f))
+  stills = null
+  if (player) Object.assign(player, { cache, stills })
+  if (started) {
+    // switched mid-visit: the stills now, and the current frame as soon as it's in
+    stills = loadStills(set)
+    if (player) player.stills = stills
+    cache.focus(pos.frame, 0)
+    draw()
+    return
+  }
+  loader.intro.then(async () => {
+    if (loader !== mine) return
     // the 4K stills are only for resting on a page: fetched after the intro frames
-    stills = loadStills()
+    stills = loadStills(set)
     if (player) player.stills = stills
     cache.focus(0, 1)
     await Promise.all([0, 1, 2, 3, 4, 5].map((f) => cache.whenDecoded(f)))
+    if (loader !== mine) return
     draw()
+    resolveReady()
   })
+}
+
+/** The screen now wants the other set: switch, keeping the page and playhead. */
+function switchSet() {
+  set = wantedSet()
+  if (player) {
+    player.set = set
+    player.room = null
+  }
+  load()
+  // a page change that was waiting for the old set's frames waits for the new ones
+  if (pendingPage !== null) {
+    const p = pendingPage
+    pendingPage = null
+    goTo(p)
+  }
 }
 
 export const whenFramesReady = () => framesReady
 
 /** Bind (or re-bind) the canvas the frames are drawn to. */
 export function attachCanvas(canvas) {
-  player = new FramePlayer(canvas)
+  player = new FramePlayer(canvas, set)
   if (import.meta.env.DEV) (window.__akPlayer = player), (window.__akCache = cache)
   player.cache = cache
   player.stills = stills
@@ -96,6 +145,7 @@ export function attachCanvas(canvas) {
   surround()
   player.render(pos.frame, null, true)
   const onResize = () => {
+    if (wantedSet() !== set) switchSet()
     if (!isScaled() && player.surround) player.surround.style.backgroundColor = ''
     surround()
     player.resize()
@@ -123,7 +173,7 @@ export function playIntro() {
   dir = 1
   tween = gsap.to(pos, {
     frame: home,
-    duration: home / FRAMES.fps,
+    duration: home / set.frames.fps,
     ease: 'none',
     onUpdate: draw,
     onComplete: () => arrive(0),
@@ -213,6 +263,22 @@ export const characterAlphaAt = (x, y) => player?.alphaAt(x, y) ?? 0
 
 /** Mouse depth parallax for the character (CSS px). */
 export const setParallax = (x, y) => player?.setParallax(x, y)
+
+/** Which version of the animation is shown: 'landscape' or 'portrait'. */
+export const frameSetId = () => set.id
+
+/**
+ * Portrait: each page's text, { [page id]: { clear, reserve } } in CSS px
+ * (engine/portraitLayout.js). The character is framed to stay clear of it.
+ */
+export function setPortraitRoom(room) {
+  if (!player) return
+  player.room = room
+  player.render(pos.frame, player.still, true)
+}
+
+/** Portrait: where page `id`'s freeze frame sits at rest, { x, y, w, h } in CSS px. */
+export const restingPlacement = (id) => player?.restingPlacement(PAGES.find((p) => p.id === id).frame) ?? null
 
 /** Dev only: show any frame (fractional), e.g. to check the camera. */
 export function devSeek(frame) {

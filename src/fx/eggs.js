@@ -1,6 +1,6 @@
 import gsap from 'gsap'
 import { EMAIL, PAGES } from '../config'
-import { characterAlphaAt, frameToScreen, setParallax } from '../engine/experience'
+import { characterAlphaAt, frameSetId, frameToScreen, setParallax } from '../engine/experience'
 import { stageScale } from '../engine/viewport'
 import { store } from '../engine/store'
 import { unlock } from './achievements'
@@ -31,7 +31,7 @@ const onCharacter = (x, y) => characterAlphaAt(x, y) > 40
 
 const canPoke = () => {
   const s = store.get()
-  return s.phase === 'ready' && s.page === HOME && s.arrived && !s.openSlug && !s.blocked
+  return s.phase === 'ready' && s.page === HOME && s.arrived && !s.openSlug && !s.menuOpen
 }
 
 export function bindEggs() {
@@ -40,7 +40,7 @@ export function bindEggs() {
   // ---- poke the character on Home ----
   const poke = { n: 0, t: 0, last: -1 }
   const onClick = (e) => {
-    if (!canPoke() || e.target.closest('a, button, .pv, .rotate, .home-title')) return
+    if (!canPoke() || e.target.closest('a, button, .pv, .mmenu, .home-title')) return
     if (!onCharacter(e.clientX, e.clientY)) return
     const now = performance.now()
     poke.n = now - poke.t < STREAK_GAP ? poke.n + 1 : 1
@@ -64,7 +64,8 @@ export function bindEggs() {
       text = LINES[i]
     }
     // speak from just above his head (right side), wherever the frame is drawn
-    const head = frameToScreen(0.6, 0.27) ?? { x: e.clientX, y: e.clientY - 8 }
+    const [hx, hy] = frameSetId() === 'portrait' ? [0.7, 0.475] : [0.6, 0.27]
+    const head = frameToScreen(hx, hy) ?? { x: e.clientX, y: e.clientY - 8 }
     showBubble({ text, at: head, duration: 2200 })
   }
   window.addEventListener('click', onClick)

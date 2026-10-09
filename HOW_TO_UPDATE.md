@@ -75,6 +75,9 @@ Every category automatically ends with the "Coming soon" cartridge.
 | About text | `src/pages/About.jsx` |
 | Link-preview image | `python scripts/build_social.py` (makes `public/og-image.jpg`) |
 | Re-rendered scroll animation | `npm run frames`, then raise `version` in `FRAMES` in `src/config.js` by 1 (so returning visitors get the new frames) |
+| Re-rendered phone (portrait) animation | `npm run frames:portrait` (makes `public/frames-portrait/`), then raise `version` in `FRAMES_PORTRAIT` in `src/config.js` by 1 |
+| Phone background | replace `assets/Website Background portrait.png`, then `npm run bg:portrait` |
+| Phone layout (portrait) | `src/styles/portrait.css`; how the character is framed on each page: `FRAMING_PORTRAIT` in `src/config.js` |
 
 ---
 

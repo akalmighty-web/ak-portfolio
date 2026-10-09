@@ -5,10 +5,7 @@ import { store } from '../engine/store'
 
 /**
  * Black screen with the logo loop. When the frames have loaded, the loop that
- * is currently playing finishes, then the intro takes over. While the "rotate
- * your phone" overlay is up (store.blocked) everything keeps downloading, but
- * the loop waits paused and the intro doesn't start; once the overlay goes, the
- * loop plays from the start and the intro follows it.
+ * is currently playing finishes, then the intro takes over.
  */
 export default function Preloader() {
   const root = useRef(null)
@@ -20,7 +17,6 @@ export default function Preloader() {
     let ready = false
     let done = false
     let fallback
-    let blocked = store.get().blocked
 
     const handOff = () => {
       if (done) return
@@ -30,16 +26,15 @@ export default function Preloader() {
       gsap.to(root.current, { autoAlpha: 0, duration: 0.5, ease: 'power1.out', onComplete: () => setGone(true) })
     }
     const onEnded = () => {
-      if (blocked) return
       if (ready) handOff()
       else v.play().catch(() => {})
     }
-    // frames ready (and not blocked): leave when this loop ends. If the video never
+    // frames ready: leave when this loop ends. If the video never
     // started (autoplay blocked / failed), don't wait for it; if it stalls, don't
     // wait longer than the rest of this loop.
     const arm = () => {
       clearTimeout(fallback)
-      if (!ready || blocked || done) return
+      if (!ready || done) return
       const left = Number.isFinite(v.duration) ? v.duration - v.currentTime : 3
       fallback = setTimeout(handOff, v.paused || v.error ? 300 : (left + 0.5) * 1000)
     }
@@ -50,27 +45,13 @@ export default function Preloader() {
       if (store.get().phase !== 'preload') return handOff()
       arm()
     })
-    const offStore = store.subscribe(() => {
-      const b = store.get().blocked
-      if (b === blocked) return
-      blocked = b
-      if (blocked) {
-        clearTimeout(fallback)
-        v.pause()
-      } else {
-        v.currentTime = 0
-        v.play().catch(() => {})
-        arm()
-      }
-    })
     v.addEventListener('ended', onEnded)
     // the logo is on screen: the frames can start downloading
     if (v.readyState >= 2) onLogoReady()
     v.addEventListener('loadeddata', onLogoReady)
     v.addEventListener('error', onLogoReady)
-    if (!blocked) v.play().catch(() => {})
+    v.play().catch(() => {})
     return () => {
-      offStore()
       v.removeEventListener('ended', onEnded)
       v.removeEventListener('loadeddata', onLogoReady)
       v.removeEventListener('error', onLogoReady)

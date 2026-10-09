@@ -8,9 +8,11 @@
     "build": "vite build",
     "preview": "vite preview",
     "frames": "python process_frames.py \"Animations/full scrollable website animation1920x1080.mp4\"",
+    "frames:portrait": "python process_frames.py \"Animations/full_scrollable_website_animation_portrait.mp4\" --portrait",
     "vectors": "python scripts/build_vectors.py",
     "band": "python scripts/build_band.py",
-    "social": "python scripts/build_social.py"
+    "social": "python scripts/build_social.py",
+    "bg:portrait": "python scripts/build_bg_portrait.py"
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^7.3.1",

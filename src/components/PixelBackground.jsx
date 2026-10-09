@@ -8,6 +8,8 @@ import { finePointer, reducedMotion } from '../fx/env'
  * Layer 1: subtle pixel background with light pointer + page parallax.
  * With a mouse, a gold-tinted copy of the same pixels shows through a soft
  * circle around the cursor while it moves (pixels "light up", then fade back).
+ * Phones held upright show their own drawn background instead (.bg-portrait,
+ * an image set in styles/portrait.css, so only they download it).
  */
 export default function PixelBackground() {
   const root = useRef(null)
@@ -80,13 +82,14 @@ export default function PixelBackground() {
   }, [ready])
 
   useEffect(() => {
-    gsap.to(root.current.querySelectorAll('svg'), { y: page * 8, duration: 1.6, ease: 'power2.inOut' })
+    gsap.to(root.current.querySelectorAll('svg, .bg-portrait'), { y: page * 8, duration: 1.6, ease: 'power2.inOut' })
   }, [page])
 
   return (
     <div ref={root} className="layer layer-bg" aria-hidden="true">
       <div className="bg-copy" dangerouslySetInnerHTML={{ __html: bg }} />
       {glowOn && <div className="bg-copy bg-glow" dangerouslySetInnerHTML={{ __html: bg }} />}
+      <div className="bg-portrait" />
     </div>
   )
 }

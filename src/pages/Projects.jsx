@@ -3,11 +3,17 @@ import gsap from 'gsap'
 import { CATEGORIES } from '../data/projects'
 import { cartridgesIn, setCategory, stepProject } from '../engine/projects'
 import { store, useStore } from '../engine/store'
+import { useViewport } from '../engine/viewport'
+import { usePortraitLayout } from '../engine/portraitLayout'
 import { usePageReveal, usePageShown } from './usePage'
 
 const INDEX = 2
 
 const MIN_NAME_SCALE = 0.5 // long names shrink down to half size to stay on one line
+
+// phones held upright: the tabs are stacked in the Figma frame's order
+const PORTRAIT_ORDER = ['concept-art', 'graphics-ai', 'game-art']
+const portraitTabs = [...CATEGORIES].sort((a, b) => PORTRAIT_ORDER.indexOf(a.id) - PORTRAIT_ORDER.indexOf(b.id))
 
 /**
  * Projects: title, category tabs and the project switcher. The cartridges
@@ -25,6 +31,8 @@ export default function Projects() {
   const canStep = list.length > 1
   const title = current?.title ?? 'Coming soon'
   const [shownTitle, setShownTitle] = useState(title)
+  const { portrait } = useViewport()
+  const layout = usePortraitLayout()
 
   // the name changes in step with the cartridges: the old one eases out while
   // they start moving, the new one lands as they settle (~0.6s)
@@ -46,12 +54,22 @@ export default function Projects() {
     })
   }, [title]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // fit the name on one line: measure its natural width and scale the font down
+  // fit the name on one line: measure its natural width and scale the font down.
+  // Phones held upright: the name sits between the hands, on up to three lines,
+  // shrinking until it fits that box (no word broken).
   useLayoutEffect(() => {
     const el = name.current
     const fit = () => {
       el.classList.remove('is-wrapped')
       el.style.setProperty('--name-scale', 1)
+      if (portrait) {
+        let scale = 1
+        while (scale > 0.4 && (el.scrollHeight > el.clientHeight + 1 || el.scrollWidth > el.clientWidth + 1)) {
+          scale -= 0.05
+          el.style.setProperty('--name-scale', scale)
+        }
+        return
+      }
       const scale = el.clientWidth / el.scrollWidth
       if (scale >= 1) return
       if (scale >= MIN_NAME_SCALE) el.style.setProperty('--name-scale', scale * 0.98)
@@ -65,7 +83,7 @@ export default function Projects() {
     document.fonts.ready.then(fit)
     window.addEventListener('resize', fit)
     return () => window.removeEventListener('resize', fit)
-  }, [shownTitle])
+  }, [shownTitle, portrait, layout])
 
   usePageReveal(root, shown, (q) =>
     gsap
@@ -84,7 +102,7 @@ export default function Projects() {
       </h2>
 
       <div className="tabs" role="tablist" aria-label="Project categories">
-        {CATEGORIES.map((c) => (
+        {(portrait ? portraitTabs : CATEGORIES).map((c) => (
           <button
             key={c.id}
             type="button"

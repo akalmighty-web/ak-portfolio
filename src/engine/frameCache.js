@@ -1,10 +1,11 @@
-import { FRAMES, HOLDS, PAGES } from '../config'
+import { PAGES } from '../config'
 import { isPhone } from './viewport'
 
 // Frames are downloaded once as compressed WebP bytes (~18 MB for the 1920 set)
 // and only a small window of them is decoded at a time: decoded frames cost
-// width × height × 4 bytes each (8 MB at 1920), so keeping all 313 decoded
-// would need over 1 GB, enough to make iPhone Safari reload the tab.
+// width × height × 4 bytes each (8 MB at 1920, or 1080 portrait), so keeping
+// them all decoded would need over 1 GB, enough to make iPhone Safari reload the tab.
+// Everything here works on one version of the animation (`set`, engine/frameSet.js).
 
 const CONCURRENT_FETCHES = 6
 const CONCURRENT_DECODES = 6
@@ -12,30 +13,35 @@ const CONCURRENT_DECODES = 6
 const BUDGET = () => (isPhone() ? 200 : 300) * 1024 * 1024
 
 /**
- * Download every frame of one size set as compressed bytes, in playback order,
- * starting once `gate` resolves. `intro` resolves when the intro frames
- * (0 → Home) are in, `all` when every frame is. A missing frame stays null and
- * falls back to a neighbour.
+ * Download every frame of one size of `set` as compressed bytes, in playback
+ * order, starting once `gate` resolves (frames listed in `first` before the
+ * rest). `intro` resolves when the intro frames (0 → Home) are in, `all` when
+ * every frame is. A missing frame stays null and falls back to a neighbour.
+ * `stop()` cancels what hasn't started (the screen switched to the other set).
  */
-export function loadFrames(size, onProgress, gate = Promise.resolve()) {
+export function loadFrames(set, size, onProgress, gate = Promise.resolve(), first = []) {
+  const FRAMES = set.frames
   const blobs = new Array(FRAMES.count).fill(undefined)
   const introCount = FRAMES.introEnd + 1
+  const order = [...new Set([...first, ...Array.from({ length: FRAMES.count }, (_, i) => i)])]
   let next = 0
   let done = 0
   let introDone = 0
+  let stopped = false
   let resolveIntro, resolveAll
   const intro = new Promise((r) => (resolveIntro = r))
   const all = new Promise((r) => (resolveAll = r))
   const waiters = new Set() // { upTo, resolve }
 
   const loadNext = () => {
-    if (next >= FRAMES.count) return
-    const i = next++
+    if (stopped || next >= order.length) return
+    const i = order[next++]
     // low priority: the logo loop (preloader) and the page itself come first
     fetch(FRAMES.path(size, i), { priority: 'low' })
       .then((r) => (r.ok ? r.blob() : null))
       .catch(() => null)
       .then((blob) => {
+        if (stopped) return
         blobs[i] = blob
         done++
         if (i < introCount && ++introDone === introCount) resolveIntro()
@@ -62,7 +68,12 @@ export function loadFrames(size, onProgress, gate = Promise.resolve()) {
   /** Is every frame up to `frame` downloaded? */
   const fetched = (frame) => fetchedUpTo() >= frame
 
-  return { blobs, intro, all, until, fetched }
+  const stop = () => {
+    stopped = true
+    blobs.fill(null)
+  }
+
+  return { blobs, intro, all, until, fetched, stop }
 }
 
 /** Decode a WebP blob: an ImageBitmap where supported, else an <img>. */
@@ -82,9 +93,9 @@ const release = (bmp) => bmp?.close?.()
 
 // During a page change the frames inside a HOLD are skipped (see experience.js),
 // so the window steps over them too.
-function step(f, dir) {
+function step(f, dir, holds) {
   let n = f + dir
-  for (const [s, e] of HOLDS) {
+  for (const [s, e] of holds) {
     if (dir > 0 && n > s && n < e) n = e
     if (dir < 0 && n < e && n > s) n = s
   }
@@ -99,7 +110,9 @@ const PINNED = new Set(PAGES.map((p) => p.frame)) // page freeze frames: always 
  * farthest ones when over budget.
  */
 export class FrameCache {
-  constructor(blobs, frameBytes, onDecoded) {
+  constructor(set, blobs, frameBytes, onDecoded) {
+    this.count = set.frames.count
+    this.holds = set.holds
     this.blobs = blobs
     this.decoded = new Map() // frame -> bitmap
     this.decoding = new Set()
@@ -129,7 +142,8 @@ export class FrameCache {
    * faster than the screen can show every frame anyway).
    */
   focus(frame, dir, stride = 1) {
-    const at = Math.max(0, Math.min(FRAMES.count - 1, Math.round(frame)))
+    if (this.disposed) return
+    const at = Math.max(0, Math.min(this.count - 1, Math.round(frame)))
     this.at = at
     this.dir = dir
     this.stride = stride
@@ -138,7 +152,7 @@ export class FrameCache {
     // lattice (f % stride === 0), so the kept set doesn't flip as the playhead moves
     const walk = (d, n, every = 1) => {
       const out = []
-      for (let f = step(at, d); f >= 0 && f < FRAMES.count && out.length < n; f = step(f, d)) if (f % every === 0) out.push(f)
+      for (let f = step(at, d, this.holds); f >= 0 && f < this.count && out.length < n; f = step(f, d, this.holds)) if (f % every === 0) out.push(f)
       return out
     }
     if (dir) {
@@ -199,20 +213,29 @@ export class FrameCache {
     this.focus(this.at, this.dir, this.stride)
   }
 
+  /** Free every decoded frame (the screen switched to the other set). */
+  dispose() {
+    this.disposed = true
+    this.keep = new Set()
+    this.queue = []
+    for (const img of this.decoded.values()) release(img)
+    this.decoded.clear()
+  }
+
   /** Resolves when frame `f` is decoded (used to start the intro on a ready frame). */
   whenDecoded(f) {
     return new Promise((resolve) => {
-      const check = () => (this.decoded.has(f) ? resolve() : setTimeout(check, 30))
+      const check = () => (this.decoded.has(f) ? resolve() : !this.disposed && setTimeout(check, 30))
       check()
     })
   }
 }
 
 /** 4K stills, one per page: downloaded up front, decoded only for the page shown. */
-export function loadStills() {
+export function loadStills(set) {
   const blobs = {}
   for (const p of PAGES) {
-    fetch(FRAMES.still(p.id), { priority: 'low' })
+    fetch(set.frames.still(p.id), { priority: 'low' })
       .then((r) => (r.ok ? r.blob() : null))
       .then((b) => b && (blobs[p.id] = b))
       .catch(() => {})

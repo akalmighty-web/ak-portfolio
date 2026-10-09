@@ -1,12 +1,20 @@
-import { FRAMES, FRAMING, INTRO_SETTLE } from '../config'
+import { INTRO_SETTLE } from '../config'
 import { isScaled } from './viewport'
 
-/** Pick the frame set matching the screen (frames are cover-fit). */
-export function pickSize() {
-  if (isScaled()) return FRAMES.sizes[1] // phones / tablets: the scaled 1920×1080 stage gets the 1920 set
+/** Pick the size of `set` matching the screen (frames are cover-fit). */
+export function pickSize(set) {
+  const { sizes } = set.frames
+  if (set.id === 'portrait') {
+    // as wide as the screen, at up to 3×: 720 for small 2× phones (≤ 760 device px),
+    // 1080 for most phones (up to 430 px at 3×), 1440 only beyond that
+    const need = window.innerWidth * Math.min(window.devicePixelRatio || 1, 3)
+    const [small, medium, large] = sizes
+    return need <= 760 ? small : need <= 1400 ? medium : large
+  }
+  if (isScaled()) return sizes[1] // phones / tablets: the scaled 1920×1080 stage gets the 1920 set
   const dpr = Math.min(window.devicePixelRatio || 1, 2)
   const need = Math.max(window.innerWidth, (window.innerHeight * 16) / 9) * dpr
-  return FRAMES.sizes.find((s) => s >= need * 0.9) ?? FRAMES.sizes.at(-1)
+  return sizes.find((s) => s >= need * 0.9) ?? sizes.at(-1)
 }
 
 const smooth = (t) => t * t * (3 - 2 * t)
@@ -17,7 +25,7 @@ const lerp = (a, b, t) => a + (b - a) * t
 const INTRO = { intro: true, zoom: 1, offsetX: 0, offsetY: 0 }
 
 /** The two framing keys around a (fractional) frame, and how far between them. */
-function keysAt(frame) {
+function keysAt(frame, FRAMING) {
   const first = FRAMING[0]
   if (frame <= first.frame) {
     const [a, b] = INTRO_SETTLE
@@ -50,6 +58,36 @@ function place(key, cw, ch, iw, ih) {
   return { s, x, y }
 }
 
+/**
+ * Portrait phones (FRAMING_PORTRAIT): where one key puts the 9:16 frame.
+ * `room[page]` is the page's text: { clear, reserve } in CSS px, measured by
+ * engine/portraitLayout.js (the character stays below `clear`, and above
+ * `reserve` px from the bottom); `unit` is canvas px per CSS px.
+ */
+function placePortrait(key, cw, ch, iw, ih, room, unit) {
+  if (key.intro) {
+    const s = Math.max(cw / iw, ch / ih) // the intro fills the screen
+    return { s, x: (cw - iw * s) / 2, y: (ch - ih * s) / 2 }
+  }
+  // screens taller than 9:16 draw the frame up to 10% bigger (cropping a little
+  // at the sides) so the character doesn't sit far below the text
+  const tall = Math.min(1.1, Math.max(1, 1 + (ch / ((cw * ih) / iw) - 1) / 2))
+  let s = key.contain ? Math.min((cw / iw) * tall, ch / ih) : (cw / iw) * tall
+  const text = key.page ? room?.[key.page] : null
+  const clear = (text?.clear ?? 0) * unit
+  const bottom = ch - (text?.reserve ?? 0) * unit
+  // what has to show (charTop → keep) fits between the text and the bottom:
+  // smaller if need be (never below 55%), unless the frame must stay full width
+  if (text && !key.flush) s = Math.min(s, Math.max((cw / iw) * 0.55, (bottom - clear) / ((key.keep - key.charTop) * ih)))
+  const dh = ih * s
+  let y = key.top ? 0 : ch - dh // bottom edge on the screen's bottom edge (or the top on the top)
+  if (text) {
+    y = Math.max(y, clear - key.charTop * dh) // below the text...
+    if (key.flush) y = Math.min(y, Math.max(ch - dh, bottom - key.keep * dh)) // ...as far as the bottom allows
+  }
+  return { s, x: (cw - iw * s) / 2, y }
+}
+
 // Intro frames are opaque. On a scaled stage (phones / tablets) the space
 // around it takes the colour of the frame's own edges while the intro plays
 // (black while the bars are closed, white once they open), so the intro still
@@ -70,8 +108,10 @@ function edgeColour(img) {
 const probe = Object.assign(document.createElement('canvas'), { width: 1, height: 1 }).getContext('2d', { willReadFrequently: true })
 
 export class FramePlayer {
-  constructor(canvas) {
+  constructor(canvas, set) {
     this.canvas = canvas
+    this.set = set // which version of the animation (engine/frameSet.js)
+    this.room = null // portrait: each page's text, see placePortrait
     this.ctx = canvas.getContext('2d')
     this.cache = null // FrameCache (decoded window of frames)
     this.stills = null // see loadStills()
@@ -119,8 +159,25 @@ export class FramePlayer {
     if (this.img) this.render(this.frame, this.still, true)
   }
 
+  /** Where frame `frame` is placed by the framing keys, in canvas px. */
+  placeAt(frame, cw, ch, iw, ih, unit) {
+    const [ka, kb, t] = keysAt(frame, this.set.framing)
+    const portrait = this.set.id === 'portrait'
+    const at = (k) => (portrait ? placePortrait(k, cw, ch, iw, ih, this.room, unit) : place(k, cw, ch, iw, ih))
+    const a = at(ka)
+    const b = at(kb)
+    return { s: lerp(a.s, b.s, t), x: lerp(a.x, b.x, t), y: lerp(a.y, b.y, t) }
+  }
+
+  /** Portrait: where a page's freeze frame sits on screen at rest, in CSS px. */
+  restingPlacement(frame) {
+    const r = this.canvas.getBoundingClientRect()
+    const { s, x, y } = this.placeAt(frame, r.width, r.height, 9, 16, 1)
+    return { x, y, w: 9 * s, h: 16 * s }
+  }
+
   resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2)
+    const dpr = Math.min(window.devicePixelRatio || 1, this.set.id === 'portrait' ? 3 : 2)
     this.dpr = dpr // canvas px per on-screen CSS px
     // sized to what's on screen (a scaled stage draws at its displayed size, so it stays sharp)
     const r = this.canvas.getBoundingClientRect()
@@ -162,17 +219,12 @@ export class FramePlayer {
     const { width: cw, height: ch } = this.canvas
     const iw = img.naturalWidth ?? img.width
     const ih = img.naturalHeight ?? img.height
-    const [ka, kb, t] = keysAt(frame)
-    const a = place(ka, cw, ch, iw, ih)
-    const b = place(kb, cw, ch, iw, ih)
-    const s = lerp(a.s, b.s, t)
+    let { s, x, y } = this.placeAt(frame, cw, ch, iw, ih, this.dpr)
 
     const ctx = this.ctx
     ctx.clearRect(0, 0, cw, ch)
-    if (this.surround) this.surround.style.backgroundColor = index < FRAMES.introEnd ? edgeColour(img) : ''
+    if (this.surround) this.surround.style.backgroundColor = index < this.set.frames.introEnd ? edgeColour(img) : ''
     ctx.imageSmoothingQuality = 'high'
-    let x = lerp(a.x, b.x, t)
-    let y = lerp(a.y, b.y, t)
     if (this.px || this.py) {
       // never uncover an edge the frame was covering (body at the bottom, hands at the sides)
       const keep = (p, shift, size, view) => {

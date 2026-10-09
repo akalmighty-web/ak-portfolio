@@ -12,6 +12,7 @@ import './styles/home.css'
 import './styles/pages.css'
 import './styles/project-view.css'
 import './styles/fx.css'
+import './styles/portrait.css'
 
 // dev only: lets tooling step the timeline when the tab can't animate
 if (import.meta.env.DEV) window.__ak = { gsap, store, goTo, onFrame, seek: devSeek }

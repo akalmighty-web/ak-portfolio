@@ -13,8 +13,10 @@ import ProjectView from './components/ProjectView'
 import AchievementToast from './components/AchievementToast'
 import SpeechBubble from './components/SpeechBubble'
 import { bindRoutes } from './engine/projects'
+import { bindPortraitLayout } from './engine/portraitLayout'
+import { useViewport } from './engine/viewport'
+import MobileMenu from './components/MobileMenu'
 import Header from './components/Header'
-import RotateOverlay from './components/RotateOverlay'
 import SeoText from './components/SeoText'
 import Nav from './components/Nav'
 import ScrollHint from './components/ScrollHint'
@@ -30,6 +32,8 @@ export default function App() {
   const canvas = useRef(null)
   const phase = useStore((s) => s.phase)
   const page = useStore((s) => s.page)
+  const arrived = useStore((s) => s.arrived)
+  const { portrait } = useViewport()
 
   useEffect(() => attachCanvas(canvas.current), [])
   useEffect(() => bindInput(), [])
@@ -37,6 +41,7 @@ export default function App() {
   useEffect(() => bindUiSounds(), [])
   useEffect(() => bindEggs(), [])
   useEffect(() => bindRoutes(), [])
+  useEffect(() => bindPortraitLayout(), [])
 
   // a direct link to a project: once the intro is done, bring the Projects page
   // up behind the project view so closing it lands there
@@ -49,12 +54,13 @@ export default function App() {
     <>
       {/* first in the document: its logo video is the first request */}
       <Preloader />
-      <main className="stage" data-phase={phase} data-page={PAGES[page].id}>
+      <main className="stage" data-phase={phase} data-page={PAGES[page].id} data-arrived={arrived}>
         {/* 1. pixel background (always the whole screen: on phones / tablets it
                also fills the space around the scaled stage) */}
         <PixelBackground />
-        {/* the stage: the whole window on desktop; on phones / tablets the
-            1920×1080 desktop layout scaled to fit (engine/viewport.js) */}
+        {/* the stage: the whole window on desktop and on phones held upright
+            (their own layout, styles/portrait.css); on tablets and sideways
+            phones the 1920×1080 desktop layout scaled to fit (engine/viewport.js) */}
         <div className="stage-scaler">
           {/* 2. content behind the character (Projects cartridges) */}
           <div className="layer layer-behind">
@@ -79,11 +85,11 @@ export default function App() {
           </div>
         </div>
       </main>
+      {portrait && <MobileMenu />}
       <SeoText />
       <ProjectView />
       <AchievementToast />
       <SpeechBubble />
-      <RotateOverlay />
     </>
   )
 }

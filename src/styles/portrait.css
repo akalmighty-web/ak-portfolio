@@ -1,0 +1,634 @@
+/* Phones held upright (html.is-portrait, engine/viewport.js). Everything here
+   is scoped to that class, so desktop, tablets and sideways phones are untouched.
+
+   The reference designs are the 9:16 frame 1:1, 360×640 design px:
+     --m    one design px: the 360×640 box fits the screen
+     --mx   the space left at each side when the screen is wider than 9:16
+     --mt   on screens taller than 9:16, the text moves down by part of the extra height
+   Text sits at the top (from the safe area down); what belongs to the
+   character is placed on its frame with the variables engine/portraitLayout.js
+   publishes (--fl / --ft / --fw / --fh-<page>: where that page's frame is). */
+
+.bg-portrait,
+.mmenu-root {
+  display: none;
+}
+
+html.is-portrait {
+  --m: min(calc(100vw / 360), calc(100vh / 640));
+  --mx: calc((100vw - 360 * var(--m)) / 2);
+  --mt: max(0px, calc((100vh - 640 * var(--m)) * 0.3));
+  --st: env(safe-area-inset-top, 0px);
+  --sb: env(safe-area-inset-bottom, 0px);
+  /* sizes still written in desktop px (band, cartridge details) come out about right */
+  --px: calc(var(--m) * 0.5);
+}
+@supports (height: 100dvh) {
+  html.is-portrait {
+    --m: min(calc(100vw / 360), calc(100dvh / 640));
+    --mt: max(0px, calc((100dvh - 640 * var(--m)) * 0.3));
+  }
+}
+
+html.is-portrait .stage {
+  bottom: auto;
+  height: 100vh;
+  height: 100dvh;
+}
+html.is-portrait .ui-box {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform: none;
+}
+
+/* ---------- background: the portrait drawing ---------- */
+html.is-portrait .bg-copy {
+  display: none;
+}
+html.is-portrait .bg-portrait {
+  display: block;
+  position: absolute;
+  inset: 0;
+  background: url('../assets/bg-portrait.webp') center bottom / cover no-repeat;
+}
+
+/* ---------- header: logo (every page); socials + Let's Connect (Home) ---------- */
+html.is-portrait .logo {
+  left: calc(var(--mx) + 25 * var(--m) - 22px);
+  top: calc(var(--st) + 24 * var(--m) - 22px);
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+}
+html.is-portrait .logo svg {
+  width: calc(19 * var(--m));
+}
+
+html.is-portrait .header-right {
+  right: calc(var(--mx) + 4px);
+  top: calc(var(--st) + 28 * var(--m) - 22px);
+  height: 44px;
+  transition: opacity 0.35s, visibility 0.35s;
+}
+html.is-portrait .stage:not([data-page='home']) .header-right {
+  opacity: 0;
+  visibility: hidden;
+}
+html.is-portrait .sound-toggle--header {
+  width: 40px;
+  height: 44px;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 13px 10px;
+}
+html.is-portrait .socials {
+  gap: 0;
+}
+html.is-portrait .socials a {
+  width: 40px;
+  height: 44px;
+  padding: 14px 11px;
+}
+html.is-portrait .header-divider {
+  height: 26px;
+  margin: 0 8px 0 4px;
+}
+html.is-portrait .lets-connect {
+  min-height: 44px;
+  justify-content: center;
+  font-size: calc(10.5 * var(--m));
+  transform: rotate(-13deg);
+}
+html.is-portrait .lets-connect-arrow {
+  width: calc(12 * var(--m));
+  margin: 1px 0 0 calc(13 * var(--m));
+}
+
+/* ---------- nav: under the title, on Home only (pages 2–4 use the menu) ---------- */
+html.is-portrait .nav {
+  top: calc(var(--st) + var(--mt) + 162 * var(--m) - 10px);
+  left: calc(var(--mx) + 27 * var(--m));
+  right: calc(var(--mx) + 42 * var(--m));
+  justify-content: space-between;
+  gap: 0;
+  padding: 0;
+  transition: opacity 0.4s, visibility 0.4s;
+}
+html.is-portrait .stage:not([data-page='home'][data-arrived='true']) .nav {
+  opacity: 0;
+  visibility: hidden;
+  transition-duration: 0.25s;
+}
+html.is-portrait .nav-item {
+  margin: 0 -6px;
+  padding: 10px 6px;
+  font-size: calc(21 * var(--m));
+}
+html.is-portrait .nav-underline {
+  bottom: 5px;
+  height: calc(6 * var(--m));
+}
+
+/* ---------- Home ---------- */
+html.is-portrait .home-title {
+  left: calc(var(--mx) + 17 * var(--m));
+  top: calc(var(--st) + var(--mt) + 52 * var(--m));
+  width: calc(300 * var(--m));
+}
+html.is-portrait .home-tag {
+  left: calc(var(--mx) + 31 * var(--m));
+  top: calc(var(--st) + var(--mt) + 222 * var(--m));
+}
+html.is-portrait .tag-line1 {
+  font-size: calc(13.4 * var(--m));
+}
+html.is-portrait .tag-line2 {
+  margin: calc(2 * var(--m)) 0 0 calc(3 * var(--m));
+  font-size: calc(24 * var(--m));
+}
+html.is-portrait .tag-underline {
+  width: calc(128 * var(--m));
+  height: calc(7 * var(--m));
+  margin: calc(3 * var(--m)) 0 0 0;
+}
+html.is-portrait .home-note {
+  left: calc(var(--mx) + 266 * var(--m));
+  top: calc(var(--st) + var(--mt) + 226 * var(--m));
+}
+html.is-portrait .home-note p {
+  font-size: calc(11.5 * var(--m));
+}
+html.is-portrait .home-note p > span:nth-child(2) { padding-left: calc(12 * var(--m)); }
+html.is-portrait .home-note p > span:nth-child(3) { padding-left: calc(3 * var(--m)); }
+html.is-portrait .home-note p > span:nth-child(4) { padding-left: calc(14 * var(--m)); }
+html.is-portrait .note-smile {
+  margin-left: calc(3 * var(--m));
+}
+html.is-portrait .note-swoosh {
+  width: calc(46 * var(--m));
+  margin: calc(5 * var(--m)) 0 0 calc(8 * var(--m));
+}
+
+/* stats: down the left of his head, on the frame (each centred on its x) */
+html.is-portrait .stat {
+  --at-x: 0.385;
+  --at-y: 0.462;
+  --size: 0.15;
+  left: calc(var(--fl-home) + (var(--at-x) - 0.15) * var(--fw-home));
+  top: calc(var(--ft-home) + var(--at-y) * var(--fh-home));
+  width: calc(0.3 * var(--fw-home));
+}
+html.is-portrait .stat:nth-child(2) {
+  --at-x: 0.265;
+  --at-y: 0.566;
+  --size: 0.105;
+}
+html.is-portrait .stat:nth-child(3) {
+  --at-x: 0.15;
+  --at-y: 0.63;
+  --size: 0.115;
+}
+html.is-portrait .stat::before {
+  inset: -14px -6px;
+}
+html.is-portrait .stat-num {
+  font-size: calc(var(--size) * var(--fw-home));
+}
+html.is-portrait .stat-label {
+  margin-top: calc(0.012 * var(--fw-home));
+  font-size: max(9.5px, calc(0.026 * var(--fw-home)));
+}
+
+/* scroll hint: right of his shoulder (Home only, as in the design) */
+html.is-portrait .scroll-hint {
+  left: min(calc(var(--fl-home) + 0.935 * var(--fw-home) - 22px), calc(100% - 46px));
+  right: auto;
+  top: calc(var(--ft-home) + 0.74 * var(--fh-home));
+  width: 44px;
+  gap: 4px;
+  font-size: 11px;
+}
+html.is-portrait .stage:not([data-page='home']) .scroll-hint {
+  display: none;
+}
+html.is-portrait .scroll-arrow {
+  width: 13px;
+}
+
+/* ---------- About: one column at the top, the character below ---------- */
+html.is-portrait .page-about {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: calc(var(--st) + var(--mt) + 54 * var(--m)) calc(var(--mx) + 36 * var(--m)) 0;
+}
+html.is-portrait .about-title,
+html.is-portrait .about-copy,
+html.is-portrait .cv-button {
+  position: static;
+}
+html.is-portrait .about-title {
+  font-size: calc(42 * var(--m));
+}
+html.is-portrait .about-copy {
+  width: auto;
+  margin-top: calc(8 * var(--m));
+  font-size: max(12px, calc(12.2 * var(--m)));
+  line-height: 1.46;
+}
+html.is-portrait .about-copy p {
+  margin: 0 0 0.5em;
+}
+html.is-portrait .cv-button {
+  align-self: center;
+  width: calc(178 * var(--m));
+  height: 44px;
+  margin-top: calc(10 * var(--m));
+  gap: 8px;
+  font-size: max(10px, calc(10 * var(--m)));
+  box-shadow: 0 5px 14px rgba(255, 3, 70, 0.22);
+}
+html.is-portrait .cv-button svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* the Worked with / Awards band along the bottom edge (into the home-bar area) */
+html.is-portrait .about-band {
+  --px: calc(var(--m) * 0.44);
+}
+html.is-portrait .band-track {
+  height: calc(80 * var(--px) + var(--sb));
+}
+html.is-portrait .band-block {
+  padding-bottom: var(--sb);
+  border-radius: calc(16 * var(--px)) calc(16 * var(--px)) 0 0;
+}
+
+/* ---------- Projects ---------- */
+html.is-portrait .projects-title {
+  top: calc(var(--st) + var(--mt) + 58 * var(--m));
+  font-size: calc(80 * var(--m));
+}
+
+/* the centre cartridge sits on the hands; the side ones are in them (Cartridges.jsx) */
+html.is-portrait .cartridges {
+  --px: calc(var(--cart-w, 260px) / 589);
+}
+html.is-portrait .cartridge {
+  left: var(--cart-x, 50%);
+  top: var(--cart-y, 40%);
+  width: var(--cart-w, 260px);
+}
+
+/* the arrows at the cartridge's middle, the name between the hands */
+html.is-portrait .switcher {
+  inset: 0;
+  display: block;
+}
+html.is-portrait .switch-btn {
+  position: absolute;
+  top: calc(var(--cart-y, 40%) - 17px);
+  width: 34px;
+  height: 34px;
+  box-shadow: 0 4px 12px rgba(255, 3, 70, 0.25);
+}
+html.is-portrait .switch-btn::after {
+  content: '';
+  position: absolute;
+  inset: -5px; /* 44px to tap */
+}
+html.is-portrait .switch-btn svg {
+  width: 18px;
+  height: 18px;
+}
+html.is-portrait .switch-btn:first-child {
+  left: max(calc(var(--mx) + 8px), calc(var(--cart-x) - var(--cart-w) / 2 - 46px));
+}
+html.is-portrait .switch-btn:last-child {
+  left: min(calc(100% - var(--mx) - 42px), calc(var(--cart-x) + var(--cart-w) / 2 + 12px));
+}
+html.is-portrait .project-name {
+  position: absolute;
+  left: calc(var(--fl-projects) + 0.32 * var(--fw-projects));
+  top: calc(var(--ft-projects) + 0.51 * var(--fh-projects));
+  width: calc(0.36 * var(--fw-projects));
+  height: calc(0.11 * var(--fh-projects));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-size: calc(0.07 * var(--fw-projects) * var(--name-scale, 1));
+  line-height: 1;
+  white-space: normal;
+  overflow-wrap: normal;
+  text-wrap: balance;
+}
+
+/* tabs: stacked under the hands, the active one dark */
+html.is-portrait .tabs {
+  --tab-h: 44px;
+  --tab-gap: 9px;
+  left: 50%;
+  right: auto;
+  width: max(150px, calc(148 * var(--m)));
+  margin-left: calc(max(150px, calc(148 * var(--m))) / -2);
+  top: min(
+    calc(var(--ft-projects) + 0.7 * var(--fh-projects)),
+    calc(100% - var(--sb) - 16px - 3 * var(--tab-h) - 2 * var(--tab-gap))
+  );
+  flex-direction: column;
+  gap: var(--tab-gap);
+}
+html.is-portrait .tab {
+  width: 100%;
+  height: var(--tab-h);
+  font-size: max(10.5px, calc(11 * var(--m)));
+  letter-spacing: 0.06em;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.07),
+    0 4px 10px rgba(0, 0, 0, 0.13);
+}
+html.is-portrait .tab[aria-selected='true'] {
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+    0 5px 12px rgba(0, 0, 0, 0.22);
+}
+
+/* ---------- Contact: one column at the top, the head below ---------- */
+html.is-portrait .page-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: calc(var(--st) + var(--mt) + 62 * var(--m)) calc(var(--mx) + 34 * var(--m)) 0;
+}
+html.is-portrait .contact-title,
+html.is-portrait .contact-copy,
+html.is-portrait .follow,
+html.is-portrait .footer {
+  position: static;
+}
+html.is-portrait .contact-title {
+  align-self: stretch;
+}
+html.is-portrait .contact-line--1 {
+  gap: calc(22 * var(--m));
+  font-size: calc(48 * var(--m));
+}
+html.is-portrait .contact-line--2 {
+  margin-top: calc(6 * var(--m));
+  font-size: calc(58 * var(--m));
+}
+html.is-portrait .mail-button {
+  width: calc(58 * var(--m));
+  height: calc(34 * var(--m));
+  min-width: 52px;
+  min-height: 44px;
+  margin-top: calc(2 * var(--m));
+  box-shadow: 0 5px 14px rgba(255, 3, 70, 0.25);
+}
+html.is-portrait .mail-button svg {
+  width: calc(18 * var(--m));
+  height: calc(18 * var(--m));
+}
+html.is-portrait .contact-copy {
+  align-self: flex-start;
+  width: calc(210 * var(--m));
+  margin-top: calc(14 * var(--m));
+  font-size: max(11.5px, calc(11.5 * var(--m)));
+  line-height: 1.45;
+}
+html.is-portrait .follow {
+  width: auto;
+  margin-top: calc(40 * var(--m));
+  gap: calc(12 * var(--m));
+}
+html.is-portrait .follow-title {
+  font-size: calc(30 * var(--m));
+}
+html.is-portrait .follow-icons {
+  gap: calc(10 * var(--m));
+}
+html.is-portrait .follow-icons a {
+  width: max(44px, calc(38 * var(--m)));
+  height: max(44px, calc(38 * var(--m)));
+  box-shadow: 0 4px 12px rgba(255, 3, 70, 0.22);
+}
+html.is-portrait .follow-icons svg {
+  width: 45%;
+  height: 45%;
+}
+html.is-portrait .footer {
+  margin-top: calc(22 * var(--m));
+  flex-direction: column;
+  gap: 2px;
+  font-size: 11px;
+}
+html.is-portrait .footer-links {
+  gap: 0;
+  padding: 0;
+  background: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+html.is-portrait .footer-links a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 10px;
+}
+html.is-portrait .footer p {
+  padding: 4px 10px;
+}
+
+/* ---------- menu button + full-screen menu (pages 2–4, MobileMenu.jsx) ---------- */
+html.is-portrait .mmenu-root {
+  display: block;
+  --menu-x: calc(var(--mx) + 26px); /* the button's centre, from the right / top */
+  --menu-y: calc(var(--st) + 24 * var(--m));
+}
+.mmenu-button {
+  position: fixed;
+  z-index: 71;
+  right: calc(var(--menu-x) - 22px);
+  top: calc(var(--menu-y) - 22px);
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transition: opacity 0.35s, visibility 0.35s;
+}
+.mmenu-button[data-visible='false'] {
+  opacity: 0;
+}
+/* the visible button: a small dark circle with two lines, turning into a red × */
+.mmenu-button::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  transition: background 0.3s, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.mmenu-button:active::before {
+  transform: scale(0.92);
+}
+.mmenu-button span {
+  position: absolute;
+  left: 14px;
+  width: 16px;
+  height: 2px;
+  border-radius: 2px;
+  background: #fff;
+  transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1), width 0.4s;
+}
+.mmenu-button span:first-child {
+  top: 18px;
+}
+.mmenu-button span:last-child {
+  top: 24px;
+  width: 11px;
+}
+.mmenu-button.is-open::before {
+  background: var(--red);
+}
+.mmenu-button.is-open span:first-child {
+  transform: translateY(3px) rotate(45deg);
+}
+.mmenu-button.is-open span:last-child {
+  width: 16px;
+  transform: translateY(-3px) rotate(-45deg);
+}
+
+.mmenu {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: calc(var(--st) + 96px) calc(var(--mx) + 28px) calc(var(--sb) + 28px);
+  background: var(--paper);
+  visibility: hidden;
+  opacity: 0;
+}
+/* the portrait drawing, faint, behind the menu */
+.mmenu::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url('../assets/bg-portrait.webp') center bottom / cover no-repeat;
+  opacity: 0.55;
+  pointer-events: none;
+}
+.mmenu-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mmenu-item {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  min-height: 64px;
+  padding: 4px 0;
+  font-family: var(--hand);
+  font-size: clamp(46px, calc(54 * var(--m)), 80px);
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.mmenu-num {
+  font-family: var(--pixel);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: #8a8a8a;
+  transform: translateY(-0.2em);
+}
+.mmenu-label {
+  position: relative;
+}
+.mmenu-underline {
+  position: absolute;
+  left: -3%;
+  width: 106%;
+  bottom: -4px;
+  height: 10px;
+  color: var(--red);
+  clip-path: inset(0 100% 0 0);
+}
+.mmenu-item[aria-current='page'],
+.mmenu-item[aria-current='page'] .mmenu-num {
+  color: var(--red);
+}
+.mmenu-item[aria-current='page'] .mmenu-underline {
+  clip-path: inset(0 0 0 0);
+}
+.mmenu-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 20px;
+  border-top: 1.5px solid rgba(0, 0, 0, 0.08);
+}
+.mmenu-socials {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mmenu-socials a {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--red);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(255, 3, 70, 0.22);
+}
+.mmenu-socials svg {
+  width: 20px;
+  height: 20px;
+}
+.sound-toggle--menu {
+  width: 44px;
+  height: 44px;
+  padding: 11px;
+}
+
+/* ---------- touch: a tap leaves :hover stuck on, so the desktop hover lifts stay off ---------- */
+@media (hover: none) {
+  html.is-portrait .tab:hover:not([aria-selected='true']) {
+    transform: none;
+    background: linear-gradient(180deg, #d2d2d2 0%, #b7b7b7 100%);
+  }
+  html.is-portrait .logo:hover,
+  html.is-portrait .socials a:hover,
+  html.is-portrait .switch-btn:hover,
+  html.is-portrait .cv-button:hover,
+  html.is-portrait .cv-button:hover svg,
+  html.is-portrait .mail-button:hover,
+  html.is-portrait .mail-button:hover svg,
+  html.is-portrait .follow-icons a:hover,
+  html.is-portrait .lets-connect:hover .lets-connect-arrow {
+    transform: none;
+  }
+  html.is-portrait .nav-item:not([aria-current='page']):hover,
+  html.is-portrait .socials a:hover,
+  html.is-portrait .lets-connect:hover {
+    color: var(--ink);
+  }
+}

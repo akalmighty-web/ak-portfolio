@@ -10,6 +10,8 @@ import { finePointer, reducedMotion } from '../fx/env'
 import { sfx } from '../fx/sound'
 import { showBubble } from '../fx/bubble'
 import { unlock } from '../fx/achievements'
+import { isPortrait, useViewport } from '../engine/viewport'
+import { SIDE_CART, portraitCartridge, usePortraitLayout } from '../engine/portraitLayout'
 
 const PROJECTS_PAGE = PAGES.findIndex((p) => p.id === 'projects')
 
@@ -55,12 +57,35 @@ export default function Cartridges() {
 // Where a cartridge sits for a given offset from the centre one.
 // x/y are percentages of the cartridge's own size (Figma: 522px apart).
 function slot(off) {
+  if (isPortrait()) return slotPortrait(off)
   const a = Math.abs(off)
   return {
     xPercent: -50 + off * 88.6,
     yPercent: -50 + Math.min(a, 1) * 5,
     scale: a === 0 ? 1 : a === 1 ? 0.77 : 0.6,
     rotation: gsap.utils.clamp(-1, 1, off) * 6,
+    autoAlpha: a >= 2 ? 0 : 1,
+    zIndex: 10 - a,
+  }
+}
+
+// Phones held upright: the centre cartridge rests on the hands, the side ones
+// are held in them, tilted and mostly hidden (engine/portraitLayout.js has the
+// sizes). Offsets are percentages of the cartridge's own size, as above.
+function slotPortrait(off) {
+  const a = Math.abs(off)
+  const c = portraitCartridge()
+  if (!a || !c) return { xPercent: -50, yPercent: -50, scale: 1, rotation: 0, autoAlpha: 1, zIndex: 10 }
+  const f = c.frame
+  const side = Math.sign(off)
+  const h = c.w * (446 / 599)
+  const x = f.x + (side < 0 ? SIDE_CART.x : 1 - SIDE_CART.x) * f.w - c.x
+  const y = f.y + SIDE_CART.y * f.h - c.y
+  return {
+    xPercent: -50 + ((a >= 2 ? 1.8 : 1) * x * 100) / c.w, // two away: out past the screen edge
+    yPercent: -50 + (y * 100) / h,
+    scale: (SIDE_CART.width * f.w) / c.w,
+    rotation: side * SIDE_CART.rotation,
     autoAlpha: a >= 2 ? 0 : 1,
     zIndex: 10 - a,
   }
@@ -105,6 +130,8 @@ function CartridgeSet({ category, active, shown }) {
   const centre = useStore((s) => s.project)
   const lastOff = useRef(new Map())
   const wasActive = useRef(null)
+  const { portrait } = useViewport()
+  const layout = usePortraitLayout()
 
   const cards = () => [...root.current.querySelectorAll('.cartridge')]
 
@@ -160,6 +187,13 @@ function CartridgeSet({ category, active, shown }) {
       gsap.to(el, { autoAlpha: 0, yPercent: 10, duration: 0.42, ease: 'power2.in' })
     }
   }, [active, centre]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // the screen changed shape (or turned): every cartridge straight to its new place
+  const placed = useRef(false)
+  useLayoutEffect(() => {
+    if (!placed.current) return void (placed.current = true)
+    if (active) place(centre, true)
+  }, [portrait, layout]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // arriving on the page: the visible set rises in from behind the hands
   useEffect(() => {

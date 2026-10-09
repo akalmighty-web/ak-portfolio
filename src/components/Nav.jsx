@@ -6,6 +6,7 @@ import { goTo, onFrame } from '../engine/experience'
 import { useStore } from '../engine/store'
 import { plainClick } from '../engine/projects'
 import { pathForPage } from '../seo'
+import { isPortrait, onViewportChange } from '../engine/viewport'
 import { Underline } from './Icons'
 
 gsap.registerPlugin(Flip)
@@ -38,8 +39,11 @@ export default function Nav() {
     // gap left for the head on Home) closes in the same timeline.
     const build = () => {
       flip?.kill()
+      flip = null
       gsap.set(row, { clearProps: 'transform,--nav-head-room,--nav-shift' })
       row.classList.replace('nav--top', 'nav--home')
+      // phones held upright: the row stays under the title, on Home only (styles/portrait.css)
+      if (isPortrait()) return
       const style = getComputedStyle(row)
       const headRoom = parseFloat(getComputedStyle(row.querySelector('.nav-item--projects')).marginLeft)
       const shift = parseFloat(style.paddingLeft)
@@ -62,9 +66,11 @@ export default function Nav() {
     // measure once the hand font is in, and again whenever the layout scales
     document.fonts.ready.then(build)
     window.addEventListener('resize', build)
+    const offViewport = onViewportChange(build)
     return () => {
       unsubscribe()
       window.removeEventListener('resize', build)
+      offViewport()
       flip?.kill()
     }
   }, [])

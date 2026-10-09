@@ -5,12 +5,15 @@ Turns the white-background scroll animation into web-ready frame sequences.
   - Intro frames (black bars + eye reveal) -> opaque WebP (no cut-out needed)
   - Site frames (Home freeze onward)       -> transparent WebP (white removed)
   - 3 sizes: 1280 / 1920 / 2560 wide, plus 4K transparent stills of the 4 freeze frames
+  - --portrait: the 9:16 phone version (2160x3840 video) -> public/frames-portrait/,
+    3 sizes 720 / 1080 / 1440 wide, stills 2160 wide, frames 0..327
 
 Cut-out method: removes only the white CONNECTED TO THE FRAME EDGE, so eye whites
 and hair shine inside the character are kept. Same rule on every frame = no flicker.
 
 Requirements:  ffmpeg on PATH,  pip install numpy scipy pillow
 Usage:         python process_frames.py "Animations/full_scrollable_website_animation.mp4"
+               python process_frames.py "Animations/full_scrollable_website_animation_portrait.mp4" --portrait
                add --stills-only to regenerate just the 4K freeze stills
 """
 import subprocess, sys, shutil, tempfile
@@ -29,15 +32,27 @@ STILL_SIZE = 3840
 WEBP_Q = 90
 WHITE_THR = 236          # how close to white counts as background
 OUT = Path("public/frames")
+
+ENCLOSED_BG = None       # enclosed white this big (fraction of the frame) is background too
+
+# portrait phones: the 9:16 video (same freeze frame numbers, runs to frame 327).
+# Its About pose traps a sliver of background between arm and body (0.21-0.26%
+# of the frame, frames 171-183); the largest hair shine is 0.16%, so it stays.
+PORTRAIT = {"LAST_FRAME": 327, "SIZES": [720, 1080, 1440], "STILL_SIZE": 2160,
+            "OUT": Path("public/frames-portrait"), "ENCLOSED_BG": 0.0019}
 # --------------------------------------------------------------------------
 
 def key(im):
     """RGB uint8 array -> RGBA uint8 array with edge-connected white removed."""
     im = im.astype(np.float32)
     mn = im.min(axis=2)
-    lab, _ = nd.label(mn >= WHITE_THR)
+    lab, n = nd.label(mn >= WHITE_THR)
     border = np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))
-    bg = np.isin(lab, border[border > 0])
+    drop = border[border > 0]
+    if ENCLOSED_BG:
+        sizes = nd.sum(np.ones_like(mn), lab, range(1, n + 1))
+        drop = np.union1d(drop, np.nonzero(sizes >= ENCLOSED_BG * mn.size)[0] + 1)
+    bg = np.isin(lab, drop)
     fg = ~bg
     band = nd.binary_dilation(bg, iterations=3) & fg
     a = fg.astype(np.float32)
@@ -91,6 +106,8 @@ def make_stills(video):
 if __name__ == "__main__":
     if not shutil.which("ffmpeg"):
         sys.exit("ffmpeg not found - install it and add it to PATH first.")
+    if "--portrait" in sys.argv:
+        globals().update(PORTRAIT)
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     video = Path(args[0] if args else "Animations/full_scrollable_website_animation.mp4")
     make_stills(video) if "--stills-only" in sys.argv else main(video)

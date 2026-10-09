@@ -57,6 +57,18 @@ export const FRAMES = {
   still: (name) => `/frames/stills/${name}.webp?v=${FRAMES.version}`,
 }
 
+// Portrait phones: the 9:16 version of the animation (process_frames.py --portrait),
+// with the same page freeze frames. Loaded instead of FRAMES on phones held upright.
+export const FRAMES_PORTRAIT = {
+  count: 328, // 0000.webp .. 0327.webp
+  introEnd: 120,
+  sizes: [720, 1080, 1440],
+  fps: 30,
+  version: 1, // raise after re-rendering, as for FRAMES
+  path: (size, i) => `/frames-portrait/${size}/${String(i).padStart(4, '0')}.webp?v=${FRAMES_PORTRAIT.version}`,
+  still: (name) => `/frames-portrait/stills/${name}.webp?v=${FRAMES_PORTRAIT.version}`,
+}
+
 // Scroll-controlled pages: `frame` is the freeze frame.
 export const PAGES = [
   { id: 'home', label: 'Home', frame: 120 },
@@ -94,6 +106,39 @@ export const INTRO_SETTLE = [100, 120]
 export const HOLDS = [
   [120, 144], // Home pose held after the freeze frame
   [240, 263], // Projects hands, around the freeze frame
+]
+
+// Portrait phones: the 9:16 frame is drawn as wide as the screen with its
+// bottom edge on the screen's bottom edge (the reference designs are this frame
+// 1:1). Each page's text sits at the top; engine/portraitLayout.js measures
+// where it ends and the frame moves down (or, where nothing touches the frame's
+// sides, also shrinks) so the character never covers it.
+//   charTop  the top of the character (or what's tied to it) in that frame,
+//            as a fraction of the frame height: it stays below the text
+//   keep     this much of the frame (from the top, fraction) stays on screen
+//   flush    the frame always spans the screen width (hands at its sides): never shrinks
+//   top      the frame's top edge on the screen's top edge (the hand close-up touches it)
+//   contain  the whole frame fits the screen (Contact: the eyes are at its very bottom)
+// Between pages the keys follow which frame edges the drawing touches (measured).
+const PROJECTS_PORTRAIT = { page: 'projects', charTop: 0.21, keep: 0.7, flush: true } // cartridge top / hands
+export const FRAMING_PORTRAIT = [
+  { frame: 120, page: 'home', charTop: 0.455, keep: 0.8 }, // Home
+  { frame: 180, page: 'about', charTop: 0.465, keep: 0.77 }, // About (the pointing hand, down to the chin)
+  { frame: 188, flush: true }, // the arm reaches the right edge
+  { frame: 202, flush: true }, // the hand rises (body still on the bottom edge)
+  { frame: 205, flush: true, top: true }, // the hand close-up: right and top edges
+  { frame: 230, flush: true, top: true },
+  { frame: 236, ...PROJECTS_PORTRAIT }, // the hands come in from the sides
+  { frame: 252, ...PROJECTS_PORTRAIT }, // Projects
+  { frame: 270, flush: true }, // the hands leave
+  { frame: 310, page: 'contact', charTop: 0.735, keep: 1, contain: true }, // Contact
+]
+
+// Portrait: frame ranges where the character holds still (measured as for HOLDS)
+export const HOLDS_PORTRAIT = [
+  [120, 144],
+  [232, 237],
+  [251, 263],
 ]
 
 // The nav moves from under the title to the top centre while the frames play
