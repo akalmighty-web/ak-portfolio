@@ -19,8 +19,8 @@ export function bindInput() {
     dir > 0 ? next() : prev()
   }
 
-  // while a project (or the phone menu) is open, the page underneath doesn't react
-  const viewOpen = () => !!store.get().openSlug || store.get().menuOpen
+  // while a project (or the phone menu / About sheet) is open, the page underneath doesn't react
+  const viewOpen = () => !!store.get().openSlug || store.get().menuOpen || store.get().sheetOpen
 
   const onWheel = (e) => {
     if (viewOpen() || e.target.closest?.('[data-native-scroll]')) return

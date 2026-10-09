@@ -12,6 +12,7 @@ let state = {
   project: 0, // Projects: index of the centre cartridge within that category
   projectDir: 0, // last switch: -1 / +1 (arrows or swipes), 0 (category)
   menuOpen: false, // portrait phones: the full-screen menu is open (the page underneath waits)
+  sheetOpen: false, // portrait phones: About's "Read more" sheet is open (likewise)
   openSlug: null, // slug of the project open in the project view (mirrors /projects/<slug>)
 }
 const subs = new Set()

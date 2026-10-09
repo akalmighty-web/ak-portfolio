@@ -4,20 +4,23 @@
    The reference designs are the 9:16 frame 1:1, 360×640 design px:
      --m    one design px: the 360×640 box fits the screen
      --mx   the space left at each side when the screen is wider than 9:16
-     --mt   on screens taller than 9:16, the text moves down by part of the extra height
+     --mv   one design px down the screen: the frames are cover-fit, so on screens
+            taller than 9:16 the designs stretch with the height, not the width
    Text sits at the top (from the safe area down); what belongs to the
    character is placed on its frame with the variables engine/portraitLayout.js
-   publishes (--fl / --ft / --fw / --fh-<page>: where that page's frame is). */
+   publishes (--fl / --ft / --fw / --fh: where the frames are drawn). */
 
 .bg-portrait,
-.mmenu-root {
+.mmenu-root,
+.about-more,
+.about-sheet {
   display: none;
 }
 
 html.is-portrait {
   --m: min(calc(100vw / 360), calc(100vh / 640));
   --mx: calc((100vw - 360 * var(--m)) / 2);
-  --mt: max(0px, calc((100vh - 640 * var(--m)) * 0.3));
+  --mv: calc(100vh / 640);
   --st: env(safe-area-inset-top, 0px);
   --sb: env(safe-area-inset-bottom, 0px);
   /* sizes still written in desktop px (band, cartridge details) come out about right */
@@ -26,7 +29,7 @@ html.is-portrait {
 @supports (height: 100dvh) {
   html.is-portrait {
     --m: min(calc(100vw / 360), calc(100dvh / 640));
-    --mt: max(0px, calc((100dvh - 640 * var(--m)) * 0.3));
+    --mv: calc(100dvh / 640);
   }
 }
 
@@ -41,6 +44,24 @@ html.is-portrait .ui-box {
   width: 100%;
   height: 100%;
   transform: none;
+}
+
+/* layers, back to front: background → cartridges → character canvas → UI. The
+   desktop design box isolates the cartridges' own z-indexes; here it has no
+   transform, so each layer gets its own stacking context instead. */
+html.is-portrait .layer-bg {
+  z-index: 0;
+}
+html.is-portrait .layer-behind {
+  z-index: 1;
+  isolation: isolate;
+}
+html.is-portrait .layer-canvas {
+  z-index: 2;
+  pointer-events: none; /* taps and swipes reach the cartridges underneath */
+}
+html.is-portrait .layer-ui {
+  z-index: 3;
 }
 
 /* ---------- background: the portrait drawing ---------- */
@@ -110,7 +131,7 @@ html.is-portrait .lets-connect-arrow {
 
 /* ---------- nav: under the title, on Home only (pages 2–4 use the menu) ---------- */
 html.is-portrait .nav {
-  top: calc(var(--st) + var(--mt) + 162 * var(--m) - 10px);
+  top: calc(var(--st) + 162 * var(--mv) - 10px);
   left: calc(var(--mx) + 27 * var(--m));
   right: calc(var(--mx) + 42 * var(--m));
   justify-content: space-between;
@@ -136,12 +157,12 @@ html.is-portrait .nav-underline {
 /* ---------- Home ---------- */
 html.is-portrait .home-title {
   left: calc(var(--mx) + 17 * var(--m));
-  top: calc(var(--st) + var(--mt) + 52 * var(--m));
+  top: calc(var(--st) + 52 * var(--mv));
   width: calc(300 * var(--m));
 }
 html.is-portrait .home-tag {
   left: calc(var(--mx) + 31 * var(--m));
-  top: calc(var(--st) + var(--mt) + 222 * var(--m));
+  top: calc(var(--st) + 222 * var(--mv));
 }
 html.is-portrait .tag-line1 {
   font-size: calc(13.4 * var(--m));
@@ -157,7 +178,7 @@ html.is-portrait .tag-underline {
 }
 html.is-portrait .home-note {
   left: calc(var(--mx) + 266 * var(--m));
-  top: calc(var(--st) + var(--mt) + 226 * var(--m));
+  top: calc(var(--st) + 226 * var(--mv));
 }
 html.is-portrait .home-note p {
   font-size: calc(11.5 * var(--m));
@@ -178,9 +199,10 @@ html.is-portrait .stat {
   --at-x: 0.385;
   --at-y: 0.462;
   --size: 0.15;
-  left: calc(var(--fl-home) + (var(--at-x) - 0.15) * var(--fw-home));
-  top: calc(var(--ft-home) + var(--at-y) * var(--fh-home));
-  width: calc(0.3 * var(--fw-home));
+  /* centred on its x, but never closer than 26px to the screen edge (cover-fit crops the sides) */
+  left: max(calc(var(--mx) - 14px), calc(var(--fl) + var(--at-x) * var(--fw) - 40px));
+  top: calc(var(--ft) + var(--at-y) * var(--fh));
+  width: 80px;
 }
 html.is-portrait .stat:nth-child(2) {
   --at-x: 0.265;
@@ -189,25 +211,25 @@ html.is-portrait .stat:nth-child(2) {
 }
 html.is-portrait .stat:nth-child(3) {
   --at-x: 0.15;
-  --at-y: 0.63;
+  --at-y: 0.622;
   --size: 0.115;
 }
 html.is-portrait .stat::before {
   inset: -14px -6px;
 }
 html.is-portrait .stat-num {
-  font-size: calc(var(--size) * var(--fw-home));
+  font-size: calc(var(--size) * var(--fw));
 }
 html.is-portrait .stat-label {
-  margin-top: calc(0.012 * var(--fw-home));
-  font-size: max(9.5px, calc(0.026 * var(--fw-home)));
+  margin-top: calc(0.012 * var(--fw));
+  font-size: max(9.5px, calc(0.026 * var(--fw)));
 }
 
 /* scroll hint: right of his shoulder (Home only, as in the design) */
 html.is-portrait .scroll-hint {
-  left: min(calc(var(--fl-home) + 0.935 * var(--fw-home) - 22px), calc(100% - 46px));
+  left: min(calc(var(--fl) + 0.935 * var(--fw) - 22px), calc(100% - 46px));
   right: auto;
-  top: calc(var(--ft-home) + 0.74 * var(--fh-home));
+  top: calc(var(--ft) + 0.74 * var(--fh));
   width: 44px;
   gap: 4px;
   font-size: 11px;
@@ -224,7 +246,7 @@ html.is-portrait .page-about {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: calc(var(--st) + var(--mt) + 54 * var(--m)) calc(var(--mx) + 36 * var(--m)) 0;
+  padding: calc(var(--st) + 48 * var(--mv)) calc(var(--mx) + 26 * var(--m)) 0;
 }
 html.is-portrait .about-title,
 html.is-portrait .about-copy,
@@ -236,9 +258,18 @@ html.is-portrait .about-title {
 }
 html.is-portrait .about-copy {
   width: auto;
-  margin-top: calc(8 * var(--m));
-  font-size: max(12px, calc(12.2 * var(--m)));
-  line-height: 1.46;
+  margin-top: calc(5 * var(--m));
+  font-size: var(--about-font, 13px); /* fitted above the hand by About.jsx */
+  line-height: 1.45;
+}
+/* shorter screens: the last paragraph(s) wait behind "Read more" */
+html.is-portrait .page-about[data-collapse='1'] .about-copy p:nth-child(3),
+html.is-portrait .page-about[data-collapse='2'] .about-copy p:nth-child(n + 2) {
+  display: none;
+}
+html.is-portrait .page-about[data-collapse='1'] .about-more[data-after='2'],
+html.is-portrait .page-about[data-collapse='2'] .about-more[data-after='1'] {
+  display: inline;
 }
 html.is-portrait .about-copy p {
   margin: 0 0 0.5em;
@@ -247,7 +278,7 @@ html.is-portrait .cv-button {
   align-self: center;
   width: calc(178 * var(--m));
   height: 44px;
-  margin-top: calc(10 * var(--m));
+  margin-top: calc(8 * var(--m));
   gap: 8px;
   font-size: max(10px, calc(10 * var(--m)));
   box-shadow: 0 5px 14px rgba(255, 3, 70, 0.22);
@@ -255,6 +286,92 @@ html.is-portrait .cv-button {
 html.is-portrait .cv-button svg {
   width: 15px;
   height: 15px;
+}
+
+html.is-portrait .about-more {
+  position: relative;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 700;
+  color: #d6003b;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+  cursor: pointer;
+  pointer-events: auto;
+}
+/* 44px tall to tap, without taking up a line of its own */
+html.is-portrait .about-more::after {
+  content: '';
+  position: absolute;
+  inset: -13px -8px;
+}
+
+/* "Read more": the whole text in a sheet over the page */
+html.is-portrait .about-sheet {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 75;
+  visibility: hidden;
+  opacity: 0;
+}
+.about-sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(253, 253, 253, 0.4);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+.about-sheet-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 86%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 26px 24px calc(var(--sb) + 30px);
+  border-radius: 22px 22px 0 0;
+  background: #fff;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.16);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: #222;
+}
+.about-sheet-panel p {
+  margin: 0 0 0.8em;
+}
+.about-sheet-title {
+  margin: 0 0 12px;
+  font-family: var(--hand);
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.about-sheet-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--red);
+  color: #fff;
+  cursor: pointer;
+}
+.about-sheet-close svg {
+  width: 20px;
+  height: 20px;
 }
 
 /* the Worked with / Awards band along the bottom edge (into the home-bar area) */
@@ -271,7 +388,7 @@ html.is-portrait .band-block {
 
 /* ---------- Projects ---------- */
 html.is-portrait .projects-title {
-  top: calc(var(--st) + var(--mt) + 58 * var(--m));
+  top: calc(var(--st) + 58 * var(--mv));
   font-size: calc(80 * var(--m));
 }
 
@@ -314,15 +431,15 @@ html.is-portrait .switch-btn:last-child {
 }
 html.is-portrait .project-name {
   position: absolute;
-  left: calc(var(--fl-projects) + 0.32 * var(--fw-projects));
-  top: calc(var(--ft-projects) + 0.51 * var(--fh-projects));
-  width: calc(0.36 * var(--fw-projects));
-  height: calc(0.11 * var(--fh-projects));
+  left: calc(var(--fl) + 0.35 * var(--fw));
+  top: calc(var(--ft) + 0.51 * var(--fh));
+  width: calc(0.3 * var(--fw));
+  height: calc(0.11 * var(--fh));
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  font-size: calc(0.07 * var(--fw-projects) * var(--name-scale, 1));
+  font-size: calc(0.07 * var(--fw) * var(--name-scale, 1));
   line-height: 1;
   white-space: normal;
   overflow-wrap: normal;
@@ -338,7 +455,7 @@ html.is-portrait .tabs {
   width: max(150px, calc(148 * var(--m)));
   margin-left: calc(max(150px, calc(148 * var(--m))) / -2);
   top: min(
-    calc(var(--ft-projects) + 0.7 * var(--fh-projects)),
+    calc(var(--ft) + 0.7 * var(--fh)),
     calc(100% - var(--sb) - 16px - 3 * var(--tab-h) - 2 * var(--tab-gap))
   );
   flex-direction: column;
@@ -366,7 +483,7 @@ html.is-portrait .page-contact {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: calc(var(--st) + var(--mt) + 62 * var(--m)) calc(var(--mx) + 34 * var(--m)) 0;
+  padding: calc(var(--st) + 62 * var(--mv)) calc(var(--mx) + 34 * var(--m)) 0;
 }
 html.is-portrait .contact-title,
 html.is-portrait .contact-copy,
@@ -400,13 +517,13 @@ html.is-portrait .mail-button svg {
 html.is-portrait .contact-copy {
   align-self: flex-start;
   width: calc(210 * var(--m));
-  margin-top: calc(14 * var(--m));
+  margin-top: calc(16 * var(--mv));
   font-size: max(11.5px, calc(11.5 * var(--m)));
   line-height: 1.45;
 }
 html.is-portrait .follow {
   width: auto;
-  margin-top: calc(40 * var(--m));
+  margin-top: calc(40 * var(--mv));
   gap: calc(12 * var(--m));
 }
 html.is-portrait .follow-title {
@@ -425,7 +542,7 @@ html.is-portrait .follow-icons svg {
   height: 45%;
 }
 html.is-portrait .footer {
-  margin-top: calc(22 * var(--m));
+  margin-top: calc(24 * var(--mv));
   flex-direction: column;
   gap: 2px;
   font-size: 11px;

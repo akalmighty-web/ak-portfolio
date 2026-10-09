@@ -120,10 +120,7 @@ function load() {
 /** The screen now wants the other set: switch, keeping the page and playhead. */
 function switchSet() {
   set = wantedSet()
-  if (player) {
-    player.set = set
-    player.room = null
-  }
+  if (player) player.set = set
   load()
   // a page change that was waiting for the old set's frames waits for the new ones
   if (pendingPage !== null) {
@@ -267,18 +264,8 @@ export const setParallax = (x, y) => player?.setParallax(x, y)
 /** Which version of the animation is shown: 'landscape' or 'portrait'. */
 export const frameSetId = () => set.id
 
-/**
- * Portrait: each page's text, { [page id]: { clear, reserve } } in CSS px
- * (engine/portraitLayout.js). The character is framed to stay clear of it.
- */
-export function setPortraitRoom(room) {
-  if (!player) return
-  player.room = room
-  player.render(pos.frame, player.still, true)
-}
-
-/** Portrait: where page `id`'s freeze frame sits at rest, { x, y, w, h } in CSS px. */
-export const restingPlacement = (id) => player?.restingPlacement(PAGES.find((p) => p.id === id).frame) ?? null
+/** Portrait: where the frames sit on screen (cover-fit), { x, y, w, h } in CSS px. */
+export const portraitPlacement = () => player?.portraitPlacement() ?? null
 
 /** Dev only: show any frame (fractional), e.g. to check the camera. */
 export function devSeek(frame) {

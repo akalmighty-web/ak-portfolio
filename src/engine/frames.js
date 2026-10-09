@@ -59,33 +59,13 @@ function place(key, cw, ch, iw, ih) {
 }
 
 /**
- * Portrait phones (FRAMING_PORTRAIT): where one key puts the 9:16 frame.
- * `room[page]` is the page's text: { clear, reserve } in CSS px, measured by
- * engine/portraitLayout.js (the character stays below `clear`, and above
- * `reserve` px from the bottom); `unit` is canvas px per CSS px.
+ * Portrait phones: every frame (and still) at exact cover-fit, centred across,
+ * bottom edge on the screen's bottom edge. The 9:16 frames are composed to
+ * match the mobile designs, so nothing is added on top.
  */
-function placePortrait(key, cw, ch, iw, ih, room, unit) {
-  if (key.intro) {
-    const s = Math.max(cw / iw, ch / ih) // the intro fills the screen
-    return { s, x: (cw - iw * s) / 2, y: (ch - ih * s) / 2 }
-  }
-  // screens taller than 9:16 draw the frame up to 10% bigger (cropping a little
-  // at the sides) so the character doesn't sit far below the text
-  const tall = Math.min(1.1, Math.max(1, 1 + (ch / ((cw * ih) / iw) - 1) / 2))
-  let s = key.contain ? Math.min((cw / iw) * tall, ch / ih) : (cw / iw) * tall
-  const text = key.page ? room?.[key.page] : null
-  const clear = (text?.clear ?? 0) * unit
-  const bottom = ch - (text?.reserve ?? 0) * unit
-  // what has to show (charTop → keep) fits between the text and the bottom:
-  // smaller if need be (never below 55%), unless the frame must stay full width
-  if (text && !key.flush) s = Math.min(s, Math.max((cw / iw) * 0.55, (bottom - clear) / ((key.keep - key.charTop) * ih)))
-  const dh = ih * s
-  let y = key.top ? 0 : ch - dh // bottom edge on the screen's bottom edge (or the top on the top)
-  if (text) {
-    y = Math.max(y, clear - key.charTop * dh) // below the text...
-    if (key.flush) y = Math.min(y, Math.max(ch - dh, bottom - key.keep * dh)) // ...as far as the bottom allows
-  }
-  return { s, x: (cw - iw * s) / 2, y }
+function placePortrait(cw, ch, iw, ih) {
+  const s = Math.max(cw / iw, ch / ih)
+  return { s, x: (cw - iw * s) / 2, y: ch - ih * s }
 }
 
 // Intro frames are opaque. On a scaled stage (phones / tablets) the space
@@ -111,7 +91,6 @@ export class FramePlayer {
   constructor(canvas, set) {
     this.canvas = canvas
     this.set = set // which version of the animation (engine/frameSet.js)
-    this.room = null // portrait: each page's text, see placePortrait
     this.ctx = canvas.getContext('2d')
     this.cache = null // FrameCache (decoded window of frames)
     this.stills = null // see loadStills()
@@ -159,20 +138,19 @@ export class FramePlayer {
     if (this.img) this.render(this.frame, this.still, true)
   }
 
-  /** Where frame `frame` is placed by the framing keys, in canvas px. */
-  placeAt(frame, cw, ch, iw, ih, unit) {
+  /** Where frame `frame` is placed (framing keys; portrait: cover-fit), in canvas px. */
+  placeAt(frame, cw, ch, iw, ih) {
+    if (this.set.id === 'portrait') return placePortrait(cw, ch, iw, ih)
     const [ka, kb, t] = keysAt(frame, this.set.framing)
-    const portrait = this.set.id === 'portrait'
-    const at = (k) => (portrait ? placePortrait(k, cw, ch, iw, ih, this.room, unit) : place(k, cw, ch, iw, ih))
-    const a = at(ka)
-    const b = at(kb)
+    const a = place(ka, cw, ch, iw, ih)
+    const b = place(kb, cw, ch, iw, ih)
     return { s: lerp(a.s, b.s, t), x: lerp(a.x, b.x, t), y: lerp(a.y, b.y, t) }
   }
 
-  /** Portrait: where a page's freeze frame sits on screen at rest, in CSS px. */
-  restingPlacement(frame) {
+  /** Portrait: where the frames sit on screen, { x, y, w, h } in CSS px. */
+  portraitPlacement() {
     const r = this.canvas.getBoundingClientRect()
-    const { s, x, y } = this.placeAt(frame, r.width, r.height, 9, 16, 1)
+    const { s, x, y } = placePortrait(r.width, r.height, 9, 16)
     return { x, y, w: 9 * s, h: 16 * s }
   }
 
@@ -219,7 +197,7 @@ export class FramePlayer {
     const { width: cw, height: ch } = this.canvas
     const iw = img.naturalWidth ?? img.width
     const ih = img.naturalHeight ?? img.height
-    let { s, x, y } = this.placeAt(frame, cw, ch, iw, ih, this.dpr)
+    let { s, x, y } = this.placeAt(frame, cw, ch, iw, ih)
 
     const ctx = this.ctx
     ctx.clearRect(0, 0, cw, ch)

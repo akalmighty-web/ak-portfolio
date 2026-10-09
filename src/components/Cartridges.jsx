@@ -41,6 +41,8 @@ export default function Cartridges() {
 
   // whole carousel in/out with the page
   useEffect(() => {
+    // portrait: leaving right after arriving must not let the fade-in outlast the fade-out
+    if (isPortrait()) gsap.killTweensOf(root.current, 'opacity,visibility')
     if (shown) gsap.fromTo(root.current, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5, ease: 'power1.out' })
     else gsap.to(root.current, { autoAlpha: 0, duration: 0.3, ease: 'power2.in' })
   }, [shown])
